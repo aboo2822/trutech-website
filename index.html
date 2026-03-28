@@ -1266,7 +1266,7 @@ async function submitQuote() {
 // ── WEBSITE CONTENT MANAGER ──
 // Fetches live content from Supabase, falls back to hardcoded defaults
 (async function applyWebsiteSettings() {
-  const SB_URL = localStorage.getItem('rt_url') || '';
+  const SB_URL = 'https://gvawcnwzvoavyxtedecd.supabase.co';
   const SB_KEY = localStorage.getItem('rt_key') || '';
   if (!SB_URL || !SB_KEY) return; // demo mode — hardcoded content is fine
 

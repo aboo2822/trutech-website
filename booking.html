@@ -466,10 +466,12 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:24px 40px;dis
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ============================================================
-// CONFIG — filled from localStorage (same as RepairTrack)
+// CONFIG — Supabase credentials
+// URL is hardcoded. Key comes from localStorage (set by RepairTrack)
+// or falls back to the hardcoded key below.
 // ============================================================
- const SB_URL = 'https://gvawcnwzvoavyxtedecd.supabase.co';
-   const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2YXdjbnd6dm9hdnl4dGVkZWNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1NzU4NTEsImV4cCI6MjA5MDE1MTg1MX0.EycPpmdJypdY4dVnqjEM0WluWldRSs0UTMRC9x98-5Y';
+const SB_URL = 'https://gvawcnwzvoavyxtedecd.supabase.co';
+const SB_KEY = localStorage.getItem('rt_key') || 'PASTE_YOUR_ANON_KEY_HERE';
 const EMAIL_CFG = JSON.parse(localStorage.getItem('rt_email_cfg') || '{}');
 
 // Booking state
@@ -914,39 +916,53 @@ async function confirmBooking() {
     device_brand: brand, device_model: model,
     service: B.service, notes: desc,
     booking_date: B.date, booking_time: B.slotTime,
-    slot_id: B.slotId, status: 'confirmed',
+    // Only include slot_id if it's a real numeric ID (not a demo slot)
+    slot_id: (B.slotId && !String(B.slotId).startsWith('demo')) ? Number(B.slotId) : null,
+    status: 'confirmed',
     reference: refNum
   };
 
   // Save to Supabase
-  if (SB_URL && SB_KEY) {
+  if (SB_URL && SB_KEY && SB_KEY !== 'PASTE_YOUR_ANON_KEY_HERE') {
     try {
       // Insert booking
-      await fetch(`${SB_URL}/rest/v1/bookings`, {
+      const bookingRes = await fetch(`${SB_URL}/rest/v1/bookings`, {
         method: 'POST',
         headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer '+SB_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
         body: JSON.stringify(booking)
       });
-      // Increment booked_count on slot
+      if (!bookingRes.ok) {
+        const err = await bookingRes.text();
+        console.warn('Booking save failed:', bookingRes.status, err);
+      }
+
+      // Increment booked_count on slot (only for real slots)
       const slot = B.slots.find(s => String(s.id) === String(B.slotId));
-      if (slot) {
+      if (slot && !String(B.slotId).startsWith('demo')) {
         await fetch(`${SB_URL}/rest/v1/availability_slots?id=eq.${B.slotId}`, {
           method: 'PATCH',
           headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer '+SB_KEY, 'Content-Type': 'application/json' },
           body: JSON.stringify({ booked_count: (slot.booked_count || 0) + 1 })
         });
       }
-      // Also create an inquiry in RepairTrack
-      await fetch(`${SB_URL}/rest/v1/inquiries`, {
+
+      // Create inquiry in RepairTrack inbox
+      const iqRes = await fetch(`${SB_URL}/rest/v1/inquiries`, {
         method: 'POST',
         headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer '+SB_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
         body: JSON.stringify({
           customer_name: name, customer_phone: phone, customer_email: email,
           device_brand: brand, device_model: model,
-          service_requested: B.service, description: `[BOOKING ${refNum}] ${fmtDisp(B.date)} at ${fmtTime(B.slotTime)}. ${desc}`,
+          service_requested: B.service,
+          description: `[BOOKING ${refNum}] ${fmtDisp(B.date)} at ${fmtTime(B.slotTime)}. ${desc}`,
           status: 'new'
         })
       });
+      if (!iqRes.ok) {
+        const err = await iqRes.text();
+        console.warn('Inquiry save failed:', iqRes.status, err);
+      }
+
     } catch(e) { console.warn('DB save failed:', e); }
   }
 
