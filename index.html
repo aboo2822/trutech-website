@@ -454,7 +454,7 @@ nav.on{background:rgba(9,9,11,.95);backdrop-filter:blur(18px);border-bottom-colo
 
 /* BOOKING */
 .booking{padding:96px 40px;background:var(--bg);}
-.bk-in{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+
 .bk-l p{font-size:13px;line-height:1.8;color:var(--g2);margin:12px 0 32px;}
 .ci{display:flex;align-items:center;gap:13px;padding:14px 0;border-bottom:1px solid var(--b1);}
 .ci-ic{width:36px;height:36px;border:1px solid var(--b2);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
@@ -504,7 +504,7 @@ footer .fc a:hover{color:var(--red);}
   .why-in{grid-template-columns:1fr;gap:40px;}
   .ps-grid{grid-template-columns:1fr 1fr;}
   .tg{grid-template-columns:1fr 1fr;}
-  .bk-in{grid-template-columns:1fr;gap:40px;}
+  
   .ft{grid-template-columns:1fr 1fr;gap:32px;}
 }
 @media(max-width:768px){
@@ -520,54 +520,8 @@ footer .fc a:hover{color:var(--red);}
   .fbot{flex-direction:column;gap:12px;text-align:center;}
   .dcta{padding:96px 18px;clip-path:polygon(0 4%,100% 0,100% 96%,0 100%);margin:-2px 0;}
   .h-acts{flex-direction:column;align-items:center;padding-bottom:0;}
-  .bk-in{grid-template-columns:1fr;}
+  
 }
-
-/* ── BOOKING MODAL ── */
-#bk-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:900;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px);}
-#bk-overlay.show{display:flex;}
-#bk-modal{background:#0f1012;border:1px solid #1e2024;border-top:3px solid #c41e1e;border-radius:12px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;font-family:"Instrument Sans",system-ui,sans-serif;}
-.bk-mhead{padding:22px 24px 16px;border-bottom:1px solid #1e2024;display:flex;align-items:center;justify-content:space-between;}
-.bk-mtitle{font-family:"Barlow Condensed",sans-serif;font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;color:#f0eeea;}
-.bk-mclose{background:none;border:1px solid #2b2f35;color:#9ca3af;width:32px;height:32px;border-radius:6px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all .2s;}
-.bk-mclose:hover{background:#c41e1e;border-color:#c41e1e;color:#fff;}
-.bk-mbody{padding:22px 24px;}
-.bk-step{display:none;}.bk-step.active{display:block;}
-.bk-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#9ca3af;margin-bottom:6px;display:block;font-family:"DM Mono",monospace;}
-.bk-input,.bk-select,.bk-textarea{width:100%;background:#09090b;border:1px solid #2b2f35;color:#f0eeea;font-family:"Instrument Sans",system-ui,sans-serif;font-size:14px;padding:11px 14px;border-radius:6px;outline:none;transition:border-color .2s;margin-bottom:14px;}
-.bk-input:focus,.bk-select:focus,.bk-textarea:focus{border-color:#c41e1e;}
-.bk-input::placeholder,.bk-textarea::placeholder{color:#6b7280;}
-.bk-select option{background:#0f1012;}
-.bk-textarea{resize:vertical;min-height:72px;}
-.bk-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.bk-pills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;}
-.bk-pill{background:#09090b;border:1px solid #2b2f35;color:#9ca3af;font-size:12px;padding:7px 14px;border-radius:6px;cursor:pointer;transition:all .2s;font-family:"Instrument Sans",system-ui,sans-serif;}
-.bk-pill.sel,.bk-pill:hover{background:#c41e1e;border-color:#c41e1e;color:#fff;}
-.bk-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;}
-.bk-slot{background:#09090b;border:1px solid #2b2f35;border-radius:8px;padding:10px 8px;text-align:center;cursor:pointer;transition:all .2s;}
-.bk-slot:hover{border-color:#c41e1e;}
-.bk-slot.sel{background:rgba(196,30,30,.12);border-color:#c41e1e;}
-.bk-slot.full{opacity:.4;cursor:not-allowed;pointer-events:none;}
-.bk-slot-time{font-size:13px;font-weight:700;color:#f0eeea;}
-.bk-slot-avail{font-size:10px;color:#6b7280;margin-top:2px;}
-.bk-foot{padding:16px 24px;border-top:1px solid #1e2024;display:flex;gap:10px;justify-content:flex-end;}
-.bk-btn-p{background:#c41e1e;color:#fff;font-family:"Barlow Condensed",sans-serif;font-size:15px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:12px 28px;border:none;border-radius:6px;cursor:pointer;transition:all .2s;}
-.bk-btn-p:hover{background:#e02020;}
-.bk-btn-o{background:transparent;color:#9ca3af;font-family:"Barlow Condensed",sans-serif;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:12px 20px;border:1px solid #2b2f35;border-radius:6px;cursor:pointer;transition:all .2s;}
-.bk-btn-o:hover{border-color:#c41e1e;color:#c41e1e;}
-.bk-progress{display:flex;gap:6px;margin-bottom:20px;}
-.bk-prog-dot{height:3px;flex:1;border-radius:2px;background:#1e2024;transition:background .3s;}
-.bk-prog-dot.done{background:#c41e1e;}
-.bk-success{text-align:center;padding:20px 0;}
-.bk-success-icon{font-size:52px;margin-bottom:12px;}
-.bk-success-title{font-family:"Barlow Condensed",sans-serif;font-size:28px;font-weight:900;text-transform:uppercase;color:#22c55e;margin-bottom:8px;}
-.bk-no-slots{text-align:center;padding:24px;color:#6b7280;font-size:13px;background:#09090b;border-radius:8px;border:1px solid #1e2024;}
-.bk-date-nav{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
-.bk-date-btn{background:#09090b;border:1px solid #2b2f35;color:#9ca3af;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:13px;transition:all .2s;}
-.bk-date-btn:hover{border-color:#c41e1e;color:#c41e1e;}
-.bk-date-label{flex:1;text-align:center;font-size:13px;font-weight:700;color:#f0eeea;}
-@media(max-width:500px){.bk-row{grid-template-columns:1fr;}.bk-slots{grid-template-columns:1fr 1fr;}}
-
 
 /* ── QUOTE POPUP ── */
 .qoverlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);z-index:800;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s;}
@@ -608,9 +562,9 @@ footer .fc a:hover{color:var(--red);}
   </div>
   <div class="nlinks">
     <a href="services.html">Services</a><a href="why-us.html">Why Us</a>
-    <a href="#process">Process</a><a href="#testimonials">Reviews</a><a href="#booking">Book</a>
+    <a href="#process">Process</a><a href="#testimonials">Reviews</a><a href="booking.html">Book</a>
   </div>
-  <button class="ncta" onclick="openBookingModal('book')" style="border:none;cursor:pointer;">Book a Repair</button>
+  <a href="booking.html" class="btn-p">Book a Repair</a>
   <button class="hbg" onclick="toggleMenu()"><span></span><span></span><span></span></button>
 </nav>
 
@@ -620,7 +574,7 @@ footer .fc a:hover{color:var(--red);}
   <a href="why-us.html" onclick="toggleMenu()">Why Us</a>
   <a href="#process" onclick="toggleMenu()">Process</a>
   <a href="#testimonials" onclick="toggleMenu()">Reviews</a>
-  <a href="#booking" onclick="toggleMenu()">Book</a>
+  <a href="booking.html" onclick="toggleMenu()">Book</a>
   <div class="mm-bot"><a href="booking.html" class="btn-p" onclick="toggleMenu()">Book a Repair</a></div>
 </div>
 
@@ -777,7 +731,7 @@ footer .fc a:hover{color:var(--red);}
     <div class="sl">Limited Offer</div>
     <h2 class="st">Free Screen Protector<br>With Every Screen Repair</h2>
     <p data-ws="promo-desc">Book any screen replacement this month and get a premium tempered glass screen protector installed free. A $25 value.</p>
-    <a href="#booking" class="btn-dk">Claim This Offer</a>
+    <a href="booking.html" class="btn-dk">Claim This Offer</a>
   </div>
 </div></div>
 
@@ -821,36 +775,7 @@ footer .fc a:hover{color:var(--red);}
 </section>
 
 <!-- BOOKING -->
-<section class="booking" id="booking">
-  <div class="bk-in">
-    <div class="bk-l rv">
-      <div class="sl">Get in Touch</div>
-      <h2 class="st">Book Your<br>Repair Today</h2>
-      <p>Walk-ins always welcome. Fill out the form and we'll get back to you quickly with a free quote.</p>
-      <div class="ci"><div class="ci-ic">📍</div><div><div class="ci-l">Location</div><div class="ci-v">Cheticamp, Cape Breton, Nova Scotia</div></div></div>
-      <div class="ci"><div class="ci-ic">📞</div><div><div class="ci-l">Phone</div><div class="ci-v">(902) 555-0192</div></div></div>
-      <div class="ci"><div class="ci-ic">🕐</div><div><div class="ci-l">Hours</div><div class="ci-v">Mon–Sat 9am–7pm · Sun 11am–5pm</div></div></div>
-      <div class="ci"><div class="ci-ic">✉️</div><div><div class="ci-l">Email</div><div class="ci-v"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5a33343c351a39323f2e332e282f2e3f393274393b">[email&#160;protected]</a></div></div></div>
-    </div>
-    <div class="rv d2">
-      <div class="fw">
-        <div class="fw-t">Get a Free Quote</div>
-        <div class="frow">
-          <div class="fg"><label class="fl">First Name</label><input class="fi" placeholder="Marie"></div>
-          <div class="fg"><label class="fl">Last Name</label><input class="fi" placeholder="Leblanc"></div>
-        </div>
-        <div class="fg"><label class="fl">Phone</label><input class="fi" placeholder="(902) 555-0000" type="tel"></div>
-        <div class="frow">
-          <div class="fg"><label class="fl">Device Brand</label><select class="fsel"><option value="">Select…</option><option>Apple iPhone</option><option>Apple iPad</option><option>MacBook / Mac</option><option>Samsung Galaxy</option><option>Google Pixel</option><option>Windows Laptop / PC</option><option>Other</option></select></div>
-          <div class="fg"><label class="fl">Model</label><input class="fi" placeholder="e.g. iPhone 15 Pro"></div>
-        </div>
-        <div class="fg"><label class="fl">Issue</label><select class="fsel"><option value="">What needs fixing?</option><option>Cracked / Broken Screen</option><option>Battery Replacement</option><option>Water Damage</option><option>Camera Issue</option><option>Charging Port</option><option>Computer Running Slow</option><option>Data Recovery</option><option>Other</option></select></div>
-        <div class="fg"><label class="fl">Details</label><textarea class="fta" placeholder="Tell us more…"></textarea></div>
-        <button class="fsub" onclick="submitForm()">Send Quote Request ⚓</button>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <footer>
   <div class="ft">
@@ -863,7 +788,7 @@ footer .fc a:hover{color:var(--red);}
     </div>
     <div class="fc"><div class="fct">Services</div><a href="services.html">Screen Repair</a><a href="services.html">Battery Swap</a><a href="services.html">Water Damage</a><a href="services.html">Computer Repair</a><a href="services.html">Tablet Repair</a><a href="services.html">Data Recovery</a></div>
     <div class="fc"><div class="fct">Devices</div><a href="#devices">Apple iPhone</a><a href="#devices">Samsung Galaxy</a><a href="#devices">Google Pixel</a><a href="#devices">iPad & Tablets</a><a href="#devices">Windows PC</a><a href="#devices">MacBook</a></div>
-    <div class="fc"><div class="fct">Company</div><a href="why-us.html">About Us</a><a href="#testimonials">Reviews</a><a href="#booking">Contact</a><a href="#">Warranty Policy</a><a href="#">Privacy Policy</a></div>
+    <div class="fc"><div class="fct">Company</div><a href="why-us.html">About Us</a><a href="#testimonials">Reviews</a><a href="booking.html">Contact</a><a href="#">Warranty Policy</a><a href="#">Privacy Policy</a></div>
   </div>
   <div class="fbot">
     <span class="fcpy">© 2026 Cheticamp TruTech Repairs — Cape Breton, NS</span>
@@ -899,98 +824,6 @@ function submitForm(){
 </script>
 
 <!-- ── BOOKING MODAL ── -->
-<div id="bk-overlay" onclick="if(event.target===this)closeBookingModal()">
-  <div id="bk-modal">
-    <div class="bk-mhead">
-      <div class="bk-mtitle" id="bk-modal-title">Book a Repair</div>
-      <button class="bk-mclose" onclick="closeBookingModal()">✕</button>
-    </div>
-    <div class="bk-mbody">
-      <div class="bk-progress" id="bk-progress">
-        <div class="bk-prog-dot done" id="pd1"></div>
-        <div class="bk-prog-dot" id="pd2"></div>
-        <div class="bk-prog-dot" id="pd3"></div>
-      </div>
-
-      <!-- STEP 1: Service + Device -->
-      <div class="bk-step active" id="bk-s1">
-        <div style="margin-bottom:14px;">
-          <label class="bk-label">What needs fixing?</label>
-          <div class="bk-pills" id="svc-pills">
-            <div class="bk-pill" onclick="selSvc(this,'Screen Repair')">📱 Screen Repair</div>
-            <div class="bk-pill" onclick="selSvc(this,'Battery Swap')">🔋 Battery</div>
-            <div class="bk-pill" onclick="selSvc(this,'Water Damage')">💧 Water Damage</div>
-            <div class="bk-pill" onclick="selSvc(this,'Computer Repair')">💻 Computer</div>
-            <div class="bk-pill" onclick="selSvc(this,'Tablet Repair')">📲 Tablet</div>
-            <div class="bk-pill" onclick="selSvc(this,'Charging Port')">🔌 Charging Port</div>
-            <div class="bk-pill" onclick="selSvc(this,'Camera Repair')">📷 Camera</div>
-            <div class="bk-pill" onclick="selSvc(this,'Data Recovery')">💾 Data Recovery</div>
-            <div class="bk-pill" onclick="selSvc(this,'Other')">❓ Other</div>
-          </div>
-        </div>
-        <div class="bk-row">
-          <div>
-            <label class="bk-label">Device Brand</label>
-            <select class="bk-select" id="bk-brand">
-              <option value="">Select brand…</option>
-              <option>Apple iPhone</option><option>Apple iPad</option>
-              <option>Apple MacBook</option><option>Samsung Galaxy</option>
-              <option>Google Pixel</option><option>Windows Laptop / PC</option><option>Other</option>
-            </select>
-          </div>
-          <div>
-            <label class="bk-label">Model (optional)</label>
-            <input class="bk-input" id="bk-model" placeholder="e.g. iPhone 15 Pro">
-          </div>
-        </div>
-        <label class="bk-label">Describe the issue</label>
-        <textarea class="bk-textarea" id="bk-issue" placeholder="Tell us what's happening…"></textarea>
-      </div>
-
-      <!-- STEP 2: Pick a date + time slot -->
-      <div class="bk-step" id="bk-s2">
-        <div style="font-size:13px;color:#9ca3af;margin-bottom:14px;">Pick an available date and time slot. All times are Atlantic Time.</div>
-        <div class="bk-date-nav">
-          <button class="bk-date-btn" onclick="bkPrevDay()">←</button>
-          <div class="bk-date-label" id="bk-date-label"></div>
-          <button class="bk-date-btn" onclick="bkNextDay()">→</button>
-        </div>
-        <div class="bk-slots" id="bk-slots-grid"></div>
-        <input type="hidden" id="bk-sel-date">
-        <input type="hidden" id="bk-sel-time">
-        <input type="hidden" id="bk-sel-slot-id">
-      </div>
-
-      <!-- STEP 3: Contact info -->
-      <div class="bk-step" id="bk-s3">
-        <div style="background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25);border-radius:8px;padding:12px 14px;margin-bottom:18px;font-size:12px;color:#9ca3af;" id="bk-summary-box"></div>
-        <div class="bk-row">
-          <div><label class="bk-label">First Name *</label><input class="bk-input" id="bk-first" placeholder="Marie"></div>
-          <div><label class="bk-label">Last Name</label><input class="bk-input" id="bk-last" placeholder="Leblanc"></div>
-        </div>
-        <label class="bk-label">Phone Number *</label>
-        <input class="bk-input" id="bk-phone" placeholder="(902) 555-0000" type="tel">
-        <label class="bk-label">Email (for confirmation)</label>
-        <input class="bk-input" id="bk-email" placeholder="you@email.com" type="email">
-        <div style="font-size:11px;color:#6b7280;margin-top:-8px;margin-bottom:14px;">⚓ We'll send a confirmation email to this address</div>
-      </div>
-
-      <!-- SUCCESS -->
-      <div class="bk-step" id="bk-success">
-        <div class="bk-success">
-          <div class="bk-success-icon">✅</div>
-          <div class="bk-success-title">Booking Confirmed!</div>
-          <div id="bk-success-detail" style="font-size:13px;color:#9ca3af;line-height:1.7;"></div>
-        </div>
-      </div>
-    </div>
-    <div class="bk-foot" id="bk-foot">
-      <button class="bk-btn-o" id="bk-back-btn" onclick="bkBack()" style="display:none;">← Back</button>
-      <button class="bk-btn-p" id="bk-next-btn" onclick="bkNext()">Next →</button>
-    </div>
-  </div>
-</div>
-
 <script>
 // ── BOOKING MODAL STATE ──
 const BK={step:1,mode:'book',service:'',brand:'',model:'',issue:'',date:'',time:'',slotId:'',slots:[]};
@@ -1001,24 +834,6 @@ function fmtDate(d){return new Date(d+'T12:00:00').toLocaleDateString('en-CA',{w
 function fmtT(t){if(!t)return'';const[h,m]=t.split(':');const ampm=+h>=12?'pm':'am';return`${+h%12||12}:${m}${ampm}`;}
 function isoDate(d){return d.toLocaleDateString('en-CA',{year:'numeric',month:'2-digit',day:'2-digit'}).split('/').reverse().join('-');}
 
-function openBookingModal(mode){
-  BK.mode=mode;BK.step=1;BK.service='';BK.brand='';BK.model='';BK.issue='';BK.date='';BK.time='';BK.slotId='';
-  document.getElementById('bk-modal-title').textContent=mode==='quote'?'Get a Free Quote':'Book a Repair';
-  // Reset steps
-  document.querySelectorAll('.bk-step').forEach(s=>s.classList.remove('active'));
-  document.getElementById('bk-s1').classList.add('active');
-  document.querySelectorAll('.bk-pill').forEach(p=>p.classList.remove('sel'));
-  ['bk-brand','bk-model','bk-issue','bk-first','bk-last','bk-phone','bk-email'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  // Set today's date
-  BK.date=isoDate(new Date());
-  updateProgress(1);
-  document.getElementById('bk-overlay').classList.add('show');
-  document.body.style.overflow='hidden';
-}
-function closeBookingModal(){
-  document.getElementById('bk-overlay').classList.remove('show');
-  document.body.style.overflow='';
-}
 
 function selSvc(el,name){
   document.querySelectorAll('.bk-pill').forEach(p=>p.classList.remove('sel'));
