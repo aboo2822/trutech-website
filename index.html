@@ -714,7 +714,7 @@ footer .fc a:hover{color:var(--red);}
     <h1 class="h-hl rv d2"><span data-ws="hero-line1">Cheticamp</span><br><em data-ws="hero-line2">TruTech</em><br><span class="ol">Repairs</span></h1>
     <div class="h-tag rv d2" data-ws="hero-tag">Phone &nbsp;·&nbsp; Tablet &nbsp;·&nbsp; Computer</div>
     <div class="h-acts rv d3">
-      <button class="btn-p" onclick="openBookingModal('quote')">Get a Free Quote</button>
+      <a href="booking.html" class="btn-p">Get a Free Quote</a>
       <a href="services.html" class="btn-o">View Services</a>
     </div>
   </div>
@@ -1163,7 +1163,7 @@ async function sendConfirmEmail(params){
 }
 
 // ── QUOTE POPUP ──
-const SB_URL_Q = localStorage.getItem('rt_url') || '';
+const SB_URL_Q = 'https://gvawcnwzvoavyxtedecd.supabase.co';
 const SB_KEY_Q = localStorage.getItem('rt_key') || '';
 
 function openQuote() {
