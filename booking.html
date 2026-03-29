@@ -476,7 +476,7 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:24px 40px;dis
 // or falls back to the hardcoded key below.
 // ============================================================
 const SB_URL = 'https://gvawcnwzvoavyxtedecd.supabase.co';
-const SB_KEY = localStorage.getItem('rt_key') || 'PASTE_YOUR_ANON_KEY_HERE';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2YXdjbnd6dm9hdnl4dGVkZWNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5OTUwOTEsImV4cCI6MjA1OTU3MTA5MX0.EycPpmdJypdY4dVnqjEM0WluWldRSs0UTMRC9x';
 const EMAIL_CFG = JSON.parse(localStorage.getItem('rt_email_cfg') || '{}');
 
 // Booking state
@@ -550,7 +550,7 @@ function generateDemoSlots() {
 }
 
 async function fetchSlots() {
-  if (!SB_URL || !SB_KEY || SB_KEY === 'PASTE_YOUR_ANON_KEY_HERE') {
+  if (!SB_URL || !SB_KEY) {
     return generateDemoSlots();
   }
   try {
@@ -934,7 +934,7 @@ async function confirmBooking() {
   };
 
   // Save to Supabase
-  if (SB_URL && SB_KEY && SB_KEY !== 'PASTE_YOUR_ANON_KEY_HERE') {
+  if (SB_URL && SB_KEY) {
     try {
       // Insert booking
       const bookingRes = await fetch(`${SB_URL}/rest/v1/bookings`, {
@@ -1055,8 +1055,8 @@ if (svcParam) {
 // ── WEBSITE CONTENT MANAGER ──
 // Fetches live content from Supabase, falls back to hardcoded defaults
 (async function applyWebsiteSettings() {
-  const SB_URL = localStorage.getItem('rt_url') || '';
-  const SB_KEY = localStorage.getItem('rt_key') || '';
+  const SB_URL = 'https://gvawcnwzvoavyxtedecd.supabase.co';
+  const SB_KEY = localStorage.getItem('rt_key') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2YXdjbnd6dm9hdnl4dGVkZWNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5OTUwOTEsImV4cCI6MjA1OTU3MTA5MX0.EycPpmdJypdY4dVnqjEM0WluWldRSs0UTMRC9x';
   if (!SB_URL || !SB_KEY) return; // demo mode — hardcoded content is fine
 
   try {
