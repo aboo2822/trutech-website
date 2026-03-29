@@ -2,6 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>
+// Auto-set Supabase credentials for website settings loader
+if(!localStorage.getItem('rt_key'))localStorage.setItem('rt_key','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2YXdjbnd6dm9hdnl4dGVkZWNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1NzU4NTEsImV4cCI6MjA5MDE1MTg1MX0.EycPpmdJypdY4dVnqjEM0WluWldRSs0UTMRC9x98-5Y');
+if(!localStorage.getItem('rt_url'))localStorage.setItem('rt_url','https://gvawcnwzvoavyxtedecd.supabase.co');
+</script>
 <!-- ═══════════════════════════════════════════════════════
      ICONS & FAVICONS — HOW TO UPDATE
      
@@ -477,7 +482,7 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:24px 40px;dis
 // or falls back to the hardcoded key below.
 // ============================================================
 const SB_URL = 'https://gvawcnwzvoavyxtedecd.supabase.co';
-const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2YXdjbnd6dm9hdnl4dGVkZWNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5OTUwOTEsImV4cCI6MjA1OTU3MTA5MX0.EycPpmdJypdY4dVnqjEM0WluWldRSs0UTMRC9x';
+const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2YXdjbnd6dm9hdnl4dGVkZWNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1NzU4NTEsImV4cCI6MjA5MDE1MTg1MX0.EycPpmdJypdY4dVnqjEM0WluWldRSs0UTMRC9x98-5Y';
 const EMAIL_CFG = JSON.parse(localStorage.getItem('rt_email_cfg') || '{}');
 
 // Booking state
@@ -1068,7 +1073,7 @@ if (svcParam) {
 // Fetches live content from Supabase, falls back to hardcoded defaults
 (async function applyWebsiteSettings() {
   const SB_URL = 'https://gvawcnwzvoavyxtedecd.supabase.co';
-  const SB_KEY = localStorage.getItem('rt_key') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2YXdjbnd6dm9hdnl4dGVkZWNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM5OTUwOTEsImV4cCI6MjA1OTU3MTA5MX0.EycPpmdJypdY4dVnqjEM0WluWldRSs0UTMRC9x';
+  const SB_KEY = localStorage.getItem('rt_key') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2YXdjbnd6dm9hdnl4dGVkZWNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1NzU4NTEsImV4cCI6MjA5MDE1MTg1MX0.EycPpmdJypdY4dVnqjEM0WluWldRSs0UTMRC9x98-5Y';
   if (!SB_URL || !SB_KEY) return; // demo mode — hardcoded content is fine
 
   try {
