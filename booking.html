@@ -404,12 +404,12 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:24px 40px;dis
           <div class="step-sub">So we can confirm your appointment</div>
         </div>
         <div class="frow">
-          <div class="fg"><label class="fl">First Name *</label><input class="fi" id="f-first" placeholder="Marie"></div>
-          <div class="fg"><label class="fl">Last Name *</label><input class="fi" id="f-last" placeholder="Leblanc"></div>
+          <div class="fg"><label class="fl">First Name *</label><input class="fi" id="f-first" placeholder="Marie" maxlength="50"></div>
+          <div class="fg"><label class="fl">Last Name *</label><input class="fi" id="f-last" placeholder="Leblanc" maxlength="50"></div>
         </div>
         <div class="frow">
-          <div class="fg"><label class="fl">Phone *</label><input class="fi" id="f-phone" placeholder="(902) 555-0000" type="tel"></div>
-          <div class="fg"><label class="fl">Email * (for confirmation)</label><input class="fi" id="f-email" placeholder="you@email.com" type="email"></div>
+          <div class="fg"><label class="fl">Phone *</label><input class="fi" id="f-phone" maxlength="20" placeholder="(902) 555-0000" type="tel"></div>
+          <div class="fg"><label class="fl">Email * (for confirmation)</label><input class="fi" id="f-email" maxlength="100" placeholder="you@email.com" type="email"></div>
         </div>
         <div class="frow">
           <div class="fg"><label class="fl">Device Brand *</label>
@@ -420,10 +420,10 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:24px 40px;dis
               <option>Windows Laptop / PC</option><option>Other</option>
             </select>
           </div>
-          <div class="fg"><label class="fl">Model</label><input class="fi" id="f-model" placeholder="e.g. iPhone 15 Pro"></div>
+          <div class="fg"><label class="fl">Model</label><input class="fi" id="f-model" placeholder="e.g. iPhone 15 Pro" maxlength="60"></div>
         </div>
         <div class="fg"><label class="fl">Describe the Problem</label>
-          <textarea class="fta" id="f-desc" placeholder="Any details help — when did it happen, what's not working, water exposure etc."></textarea>
+          <textarea class="fta" id="f-desc" maxlength="500" placeholder="Any details help — when did it happen, what's not working, water exposure etc."></textarea>
         </div>
         <div class="step-nav">
           <button class="btn-back" onclick="goStep(1)">← Back</button>
@@ -442,6 +442,7 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:24px 40px;dis
         <div style="font-size:12px;color:var(--g2);margin-bottom:20px;line-height:1.7;">
           By confirming, you agree to our <strong>90-day warranty policy</strong>. A confirmation email will be sent to your address. Walk-ins also welcome — no appointment required.
         </div>
+        <div id="booking-debug-error" style="font-size:11px;color:#f87171;padding:8px;margin-bottom:8px;word-break:break-all;"></div>
         <div class="step-nav">
           <button class="btn-back" onclick="goStep(2)">← Edit</button>
           <button class="btn-next" id="confirm-btn" onclick="confirmBooking()">✓ Confirm Booking</button>
@@ -919,13 +920,19 @@ async function confirmBooking() {
   const brand   = document.getElementById('f-brand').value;
   const model   = document.getElementById('f-model').value.trim();
   const desc    = document.getElementById('f-desc').value.trim();
-  const name    = `${first} ${last}`.trim();
+  // Sanitize all inputs — strip HTML tags and trim
+  const sanitize = s => s.replace(/<[^>]*>/g,'').trim().substring(0,200);
+  const name    = sanitize(`${first} ${last}`);
+  const safePhone = sanitize(phone);
+  const safeEmail = sanitize(email);
+  const safeModel = sanitize(model);
+  const safeDesc  = sanitize(desc);
   const refNum  = 'BK-' + Date.now().toString().slice(-6);
 
   const booking = {
-    customer_name: name, customer_phone: phone, customer_email: email,
-    device_brand: brand, device_model: model,
-    service: B.service, notes: desc,
+    customer_name: name, customer_phone: safePhone, customer_email: safeEmail,
+    device_brand: brand, device_model: safeModel,
+    service: B.service, notes: safeDesc,
     booking_date: B.date, booking_time: B.slotTime,
     // Only include slot_id if it's a real numeric ID (not a demo slot)
     slot_id: (B.slotId && !String(B.slotId).startsWith('demo')) ? Number(B.slotId) : null,
@@ -943,8 +950,13 @@ async function confirmBooking() {
         body: JSON.stringify(booking)
       });
       if (!bookingRes.ok) {
-        const err = await bookingRes.text();
-        console.warn('Booking save failed:', bookingRes.status, err);
+        const errText = await bookingRes.text();
+        console.error('BOOKING SAVE FAILED:', bookingRes.status, errText);
+        // Show error to user so we can debug
+        const debugEl = document.getElementById('booking-debug-error');
+        if (debugEl) debugEl.textContent = 'DB Error ' + bookingRes.status + ': ' + errText;
+      } else {
+        console.log('✅ Booking saved to DB successfully');
       }
 
       // Increment booked_count on slot (only for real slots)
