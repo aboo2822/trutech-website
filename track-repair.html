@@ -320,11 +320,19 @@ const SUPABASE_URL = 'https://gvawcnwzvoavyxtedecd.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2YXdjbnd6dm9hdnl4dGVkZWNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1NzU4NTEsImV4cCI6MjA5MDE1MTg1MX0.EycPpmdJypdY4dVnqjEM0WluWldRSs0UTMRC9x98-5Y';
 
 const STATUS_CONFIG = {
-  pending:     {label:'Pending',     color:'#f59e0b', bg:'rgba(245,158,11,.12)', steps:[true,false,false,false,false]},
-  inprogress:  {label:'In Progress', color:'#3b82f6', bg:'rgba(59,130,246,.12)',  steps:[true,true,true,false,false]},
-  ready:       {label:'Ready for Pickup!', color:'#22c55e', bg:'rgba(34,197,94,.12)', steps:[true,true,true,true,true]},
-  delivered:   {label:'Delivered',   color:'#6366f1', bg:'rgba(99,102,241,.12)', steps:[true,true,true,true,true]},
-  notrepaired: {label:'Not Repaired',color:'#ef4444', bg:'rgba(239,68,68,.12)',  steps:[true,false,false,false,false]},
+  // New workflow statuses
+  intake:      {label:'Intake & Diagnosis', color:'#3b82f6', bg:'rgba(59,130,246,.12)',  steps:[true,false,false,false,false]},
+  parts:       {label:'Parts Ordered',      color:'#f59e0b', bg:'rgba(245,158,11,.12)', steps:[true,true,false,false,false]},
+  inprogress:  {label:'Repair In Progress', color:'#a855f7', bg:'rgba(168,85,247,.12)', steps:[true,true,true,false,false]},
+  ready:       {label:'Ready for Pickup!',  color:'#22c55e', bg:'rgba(34,197,94,.12)',  steps:[true,true,true,true,false]},
+  delivered:   {label:'Delivered',          color:'#6366f1', bg:'rgba(99,102,241,.12)', steps:[true,true,true,true,true]},
+  done:        {label:'Complete',           color:'#22c55e', bg:'rgba(34,197,94,.12)',  steps:[true,true,true,true,true]},
+  diag_done:   {label:'Findings Ready',     color:'#3b82f6', bg:'rgba(59,130,246,.12)', steps:[true,true,false,false,false]},
+  quick:       {label:'In Progress',        color:'#f59e0b', bg:'rgba(245,158,11,.12)', steps:[true,false,false,false,false]},
+  diagnostic:  {label:'Diagnosing',         color:'#3b82f6', bg:'rgba(59,130,246,.12)', steps:[true,false,false,false,false]},
+  // Legacy statuses (backwards compat)
+  pending:     {label:'Intake & Diagnosis', color:'#f59e0b', bg:'rgba(245,158,11,.12)', steps:[true,false,false,false,false]},
+  notrepaired: {label:'Not Repaired',       color:'#ef4444', bg:'rgba(239,68,68,.12)',  steps:[true,false,false,false,false]},
 };
 
 const STEP_NAMES = ['Intake & Diagnostic','Parts Confirmed','Repair In Progress','Quality Check','Ready for Pickup'];
