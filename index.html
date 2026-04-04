@@ -214,13 +214,13 @@ body{background:var(--bg);color:var(--white);font-family:var(--fb);overflow-x:hi
 
 /* CURSOR */
 #cur{position:fixed;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
-#cur-r{position:fixed;width:34px;height:34px;border:1.5px solid var(--red);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:none;opacity:.6;}
+#cur-r{position:fixed;width:34px;height:34px;border:1.5px solid var(--red);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .12s;opacity:.4;}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:14px 40px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid transparent;transition:all .4s;}
 nav.on{background:rgba(9,9,11,.95);backdrop-filter:blur(18px);border-bottom-color:var(--b1);}
 .nlogo{display:flex;align-items:center;gap:10px;}
-.nlogo img{width:64px;height:64px;object-fit:contain;}
+.nlogo img{width:52px;height:52px;object-fit:contain;}
 .nname{font-family:var(--fd);font-size:17px;font-weight:900;letter-spacing:1px;text-transform:uppercase;line-height:1.1;}
 .nsub{font-family:var(--fm);font-size:9px;color:var(--red);letter-spacing:2px;}
 .nlinks{display:flex;gap:28px;}
@@ -228,7 +228,7 @@ nav.on{background:rgba(9,9,11,.95);backdrop-filter:blur(18px);border-bottom-colo
 .nlinks a:hover{color:var(--red);}
 .ncta{background:var(--red);color:#fff;font-family:var(--fd);font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:9px 20px;border:none;cursor:none;transition:all .2s;text-decoration:none;}
 .ncta:hover{background:var(--red2);transform:translate(-2px,-2px);box-shadow:2px 2px 0 rgba(196,30,30,.3);}
-.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;-webkit-tap-highlight-color:transparent;}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:none;padding:4px;}
 .hbg span{width:22px;height:2px;background:var(--white);display:block;}
 
 /* HERO */
@@ -482,7 +482,7 @@ nav.on{background:rgba(9,9,11,.95);backdrop-filter:blur(18px);border-bottom-colo
 footer{background:var(--s1);border-top:1px solid var(--b1);padding:52px 40px 24px;}
 .ft{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:36px;}
 .fb-br{display:flex;align-items:center;gap:9px;margin-bottom:9px;}
-.fb-br img{width:64px;height:64px;object-fit:contain;}
+.fb-br img{width:44px;height:44px;object-fit:contain;}
 .fb-nm{font-family:var(--fd);font-size:15px;font-weight:900;text-transform:uppercase;letter-spacing:1px;}
 .fb-sb{font-family:var(--fm);font-size:9px;color:var(--red);letter-spacing:2px;}
 .fb p{font-size:12px;line-height:1.8;color:var(--g2);max-width:240px;margin-top:8px;}
@@ -513,12 +513,9 @@ footer .fc a:hover{color:var(--red);}
   .ft{grid-template-columns:1fr 1fr;gap:32px;}
 }
 @media(max-width:768px){
-  nav{padding:10px 14px;}
+  nav{padding:12px 18px;}
   .nlinks,.ncta{display:none;}
-  .hbg{display:flex;cursor:pointer;}
-  /* Show book button on mobile but smaller */
-  .ncta{display:block!important;}
-  .btn-p{font-size:11px;padding:9px 14px;letter-spacing:1px;}
+  .hbg{display:flex;}
   .hero{padding:72px 18px 100px;}.services,.why,.process,.devices,.testimonials,.booking{padding:72px 18px;}
   .svc-h{flex-direction:column;align-items:flex-start;}
   .sg,.ps-grid,.tg{grid-template-columns:1fr;}
@@ -700,12 +697,12 @@ footer .fc a:hover{color:var(--red);}
     <p class="svc-hr">Phone, tablet, or computer — we handle it all with premium parts and a 90-day warranty on every repair.</p>
   </div>
   <div class="sg">
-    <div class="sc rv" onclick="window.location.href='booking.html?service={svc_id}'" style="cursor:pointer;"><span class="sc-n">01</span><span class="sc-i">📱</span><div class="sc-nm">Screen Repair</div><p class="sc-d">Cracked, shattered, or unresponsive screens replaced with OEM-quality parts. All iPhone, Samsung and Android models.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="screen">$79</span></div><div class="sc-ar">→</div></div>
-    <div class="sc rv d1" onclick="window.location.href='booking.html?service={svc_id}'" style="cursor:pointer;"><span class="sc-n">02</span><span class="sc-i">🔋</span><div class="sc-nm">Battery Swap</div><p class="sc-d">Draining fast? We swap batteries in under 30 minutes and restore all-day battery life to your device.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="battery">$49</span></div><div class="sc-ar">→</div></div>
-    <div class="sc rv d2" onclick="window.location.href='booking.html?service={svc_id}'" style="cursor:pointer;"><span class="sc-n">03</span><span class="sc-i">💧</span><div class="sc-nm">Water Damage</div><p class="sc-d">Dropped in water? Our ultrasonic cleaning process recovers most water-damaged phones and tablets.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="water">$89</span></div><div class="sc-ar">→</div></div>
-    <div class="sc rv"><span class="sc-n">04</span><span class="sc-i">💻</span><div class="sc-nm">Computer Repair</div><p class="sc-d">Slow PC, virus removal, hardware upgrades, broken screens — Mac and Windows laptops and desktops.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="computer">$69</span></div><div class="sc-ar">→</div></div>
-    <div class="sc rv d1"><span class="sc-n">05</span><span class="sc-i">📲</span><div class="sc-nm">Tablet Repair</div><p class="sc-d">iPad and Android tablet screen repairs, battery replacements, charging port fixes and software issues.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="tablet">$59</span></div><div class="sc-ar">→</div></div>
-    <div class="sc rv d2"><span class="sc-n">06</span><span class="sc-i">💾</span><div class="sc-nm">Data Recovery</div><p class="sc-d">Dead device? Don't lose your photos. Our advanced recovery tools retrieve data that others can't reach.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="data">$99</span></div><div class="sc-ar">→</div></div>
+    <div class="sc rv"><span class="sc-n">01</span><span class="sc-i">📱</span><div class="sc-nm">Screen Repair</div><p class="sc-d">Cracked, shattered, or unresponsive screens replaced with OEM-quality parts. All iPhone, Samsung and Android models.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa">$79</span></div><div class="sc-ar">→</div></div>
+    <div class="sc rv d1"><span class="sc-n">02</span><span class="sc-i">🔋</span><div class="sc-nm">Battery Swap</div><p class="sc-d">Draining fast? We swap batteries in under 30 minutes and restore all-day battery life to your device.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa">$49</span></div><div class="sc-ar">→</div></div>
+    <div class="sc rv d2"><span class="sc-n">03</span><span class="sc-i">💧</span><div class="sc-nm">Water Damage</div><p class="sc-d">Dropped in water? Our ultrasonic cleaning process recovers most water-damaged phones and tablets.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa">$89</span></div><div class="sc-ar">→</div></div>
+    <div class="sc rv"><span class="sc-n">04</span><span class="sc-i">💻</span><div class="sc-nm">Computer Repair</div><p class="sc-d">Slow PC, virus removal, hardware upgrades, broken screens — Mac and Windows laptops and desktops.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa">$69</span></div><div class="sc-ar">→</div></div>
+    <div class="sc rv d1"><span class="sc-n">05</span><span class="sc-i">📲</span><div class="sc-nm">Tablet Repair</div><p class="sc-d">iPad and Android tablet screen repairs, battery replacements, charging port fixes and software issues.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa">$59</span></div><div class="sc-ar">→</div></div>
+    <div class="sc rv d2"><span class="sc-n">06</span><span class="sc-i">💾</span><div class="sc-nm">Data Recovery</div><p class="sc-d">Dead device? Don't lose your photos. Our advanced recovery tools retrieve data that others can't reach.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa">$99</span></div><div class="sc-ar">→</div></div>
   </div>
 </section>
 
@@ -794,7 +791,7 @@ footer .fc a:hover{color:var(--red);}
       </div>
       <p>Cape Breton's trusted phone, tablet and computer repair specialists. Serving Cheticamp and the Cabot Trail.</p>
     </div>
-    <div class="fc"><div class="fct">Services</div><a href="services.html#screen">Screen Repair</a><a href="services.html#battery">Battery Swap</a><a href="services.html#water">Water Damage</a><a href="services.html#computer">Computer Repair</a><a href="services.html#tablet">Tablet Repair</a><a href="services.html#data">Data Recovery</a></div>
+    <div class="fc"><div class="fct">Services</div><a href="services.html">Screen Repair</a><a href="services.html">Battery Swap</a><a href="services.html">Water Damage</a><a href="services.html">Computer Repair</a><a href="services.html">Tablet Repair</a><a href="services.html">Data Recovery</a></div>
     <div class="fc"><div class="fct">Devices</div><a href="#devices">Apple iPhone</a><a href="#devices">Samsung Galaxy</a><a href="#devices">Google Pixel</a><a href="#devices">iPad & Tablets</a><a href="#devices">Windows PC</a><a href="#devices">MacBook</a></div>
     <div class="fc"><div class="fct">Company</div><a href="why-us.html">About Us</a><a href="#testimonials">Reviews</a><a href="booking.html">Contact</a><a href="#">Warranty Policy</a><a href="#">Privacy Policy</a></div>
   </div>
@@ -1088,100 +1085,129 @@ async function submitQuote() {
 <script>
 // ── WEBSITE CONTENT MANAGER ──
 // Fetches live content from Supabase, falls back to hardcoded defaults
-
-</script>
-
-<script>
-(async function applyWebsiteSettings(){
+(async function applyWebsiteSettings() {
   const SB_URL = 'https://gvawcnwzvoavyxtedecd.supabase.co';
-  const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2YXdjbnd6dm9hdnl4dGVkZWNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1NzU4NTEsImV4cCI6MjA5MDE1MTg1MX0.EycPpmdJypdY4dVnqjEM0WluWldRSs0UTMRC9x98-5Y';
+  const SB_KEY = localStorage.getItem('rt_key') || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2YXdjbnd6dm9hdnl4dGVkZWNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1NzU4NTEsImV4cCI6MjA5MDE1MTg1MX0.EycPpmdJypdY4dVnqjEM0WluWldRSs0UTMRC9x98-5Y';
+  if (!SB_URL || !SB_KEY) return; // demo mode — hardcoded content is fine
+
   try {
-    const res = await fetch(SB_URL+'/rest/v1/website_settings?select=key,value',{
-      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+    const res = await fetch(`${SB_URL}/rest/v1/website_settings?select=key,value`, {
+      headers: { 'apikey': SB_KEY, 'Authorization': 'Bearer ' + SB_KEY }
     });
-    if(!res.ok) return;
+    if (!res.ok) return;
     const rows = await res.json();
-    if(!rows||!rows.length) return;
-    const S={};
-    rows.forEach(r=>{ try{S[r.key]=JSON.parse(r.value);}catch{S[r.key]=r.value;} });
+    if (!rows || !rows.length) return;
 
-    // Prices - service cards
-    if(S.prices&&Array.isArray(S.prices)){
-      S.prices.forEach(svc=>{
-        document.querySelectorAll('[data-ws-price="'+svc.id+'"]').forEach(el=>el.textContent=svc.from);
-        document.querySelectorAll('[data-ws-price-name="'+svc.id+'"]').forEach(el=>el.textContent=svc.name);
+    const settings = {};
+    rows.forEach(r => {
+      try { settings[r.key] = JSON.parse(r.value); } catch { settings[r.key] = r.value; }
+    });
+
+    // Apply phone numbers
+    if (settings.phone) {
+      document.querySelectorAll('[data-ws="phone"]').forEach(el => el.textContent = settings.phone);
+      document.querySelectorAll('a[href^="tel:"]').forEach(el => {
+        el.href = 'tel:' + settings.phone.replace(/\D/g,'');
+        if (el.textContent.match(/^\(?\d/)) el.textContent = settings.phone;
       });
     }
 
-    // Price table rows
-    if(S.priceTable&&Array.isArray(S.priceTable)){
-      const tbody=document.getElementById('price-tbody');
-      if(tbody){
-        tbody.innerHTML=S.priceTable.map(row=>
-          '<tr><td class="device">'+row.device+'</td><td class="detail">'+row.repair+'</td><td class="price">'+row.price+'</td><td class="detail">'+row.time+'</td></tr>'
-        ).join('');
-      }
-    }
-
-    // Contact info
-    if(S.phone){
-      document.querySelectorAll('[data-ws="phone"]').forEach(el=>el.textContent=S.phone);
-      document.querySelectorAll('a[href^="tel:"]').forEach(el=>{
-        el.href='tel:'+S.phone.replace(/\D/g,'');
-        if(el.textContent.match(/^\(?\d/))el.textContent=S.phone;
+    // Apply email
+    if (settings.email) {
+      document.querySelectorAll('[data-ws="email"]').forEach(el => el.textContent = settings.email);
+      document.querySelectorAll('a[href^="mailto:"]').forEach(el => {
+        el.href = 'mailto:' + settings.email;
+        if (!el.textContent.includes('@') === false && el.textContent.includes('@')) el.textContent = settings.email;
       });
     }
-    if(S.email){
-      document.querySelectorAll('[data-ws="email"]').forEach(el=>el.textContent=S.email);
-      document.querySelectorAll('a[href^="mailto:"]').forEach(el=>{el.href='mailto:'+S.email;});
-    }
-    if(S.address)document.querySelectorAll('[data-ws="address"]').forEach(el=>el.textContent=S.address);
 
-    // Promo banner
-    if(S.promo){
-      const banner=document.querySelector('[data-ws="promo-banner"]');
-      if(banner){
-        if(S.promo.active===false){banner.style.display='none';}
-        else{
-          banner.style.display='';
-          const lbl=banner.querySelector('[data-ws="promo-label"]');
-          const hl=banner.querySelector('[data-ws="promo-headline"]');
-          const desc=banner.querySelector('[data-ws="promo-desc"]');
-          const btn=banner.querySelector('[data-ws="promo-btn"]');
-          if(lbl&&S.promo.label)lbl.textContent=S.promo.label;
-          if(hl&&S.promo.headline)hl.innerHTML=S.promo.headline;
-          if(desc&&S.promo.desc)desc.textContent=S.promo.desc;
-          if(btn&&S.promo.btn)btn.textContent=S.promo.btn;
+    // Apply address
+    if (settings.address) {
+      document.querySelectorAll('[data-ws="address"]').forEach(el => el.textContent = settings.address);
+    }
+
+    // Apply service prices
+    if (settings.prices && Array.isArray(settings.prices)) {
+      settings.prices.forEach(svc => {
+        document.querySelectorAll(`[data-ws-price="${svc.id}"]`).forEach(el => el.textContent = svc.from);
+        document.querySelectorAll(`[data-ws-price-name="${svc.id}"]`).forEach(el => el.textContent = svc.name);
+      });
+    }
+
+    // Apply promo banner
+    if (settings.promo) {
+      const p = settings.promo;
+      const banner = document.querySelector('[data-ws="promo-banner"]');
+      if (banner) {
+        if (p.active === false) {
+          banner.style.display = 'none';
+        } else {
+          banner.style.display = '';
+          const label = banner.querySelector('[data-ws="promo-label"]');
+          const headline = banner.querySelector('[data-ws="promo-headline"]');
+          const desc = banner.querySelector('[data-ws="promo-desc"]');
+          const btn = banner.querySelector('[data-ws="promo-btn"]');
+          if (label && p.label) label.textContent = p.label;
+          if (headline && p.headline) headline.textContent = p.headline;
+          if (desc && p.desc) desc.textContent = p.desc;
+          if (btn && p.btn) btn.textContent = p.btn;
         }
       }
     }
 
-    // Hero text
-    if(S.hero){
-      const map={'badge':'hero-badge','line1':'hero-l1','line2':'hero-l2','line3':'hero-l3','tag':'hero-tag','btn1':'hero-btn1','btn2':'hero-btn2'};
-      Object.keys(map).forEach(k=>{
-        if(S.hero[k]){
-          const el=document.getElementById(map[k]);
-          if(el)el.textContent=S.hero[k];
-        }
-      });
+    // Apply hero text
+    if (settings.hero) {
+      const h = settings.hero;
+      const badge = document.querySelector('[data-ws="hero-badge"]');
+      const l1 = document.querySelector('[data-ws="hero-line1"]');
+      const l2 = document.querySelector('[data-ws="hero-line2"]');
+      const l3 = document.querySelector('[data-ws="hero-line3"]');
+      const tag = document.querySelector('[data-ws="hero-tag"]');
+      if (badge && h.badge) badge.textContent = h.badge;
+      if (l1 && h.line1) l1.textContent = h.line1;
+      if (l2 && h.line2) l2.textContent = h.line2;
+      if (l3 && h.line3) l3.textContent = h.line3;
+      if (tag && h.tag) { tag.innerHTML = `<span style="color:var(--red);font-size:9px;">⚓</span> ${h.tag} <span style="color:var(--red);font-size:9px;">⚓</span>`; }
     }
 
-    // Reviews
-    if(S.reviews&&Array.isArray(S.reviews)&&S.reviews.length){
-      const grid=document.getElementById('reviews-grid');
-      if(grid){
-        grid.innerHTML=S.reviews.map(r=>
-          '<div class="rv-card"><div class="rv-stars">'+('★'.repeat(r.stars||5))+'</div>'+
-          '<p class="rv-text">"'+r.text+'"</p>'+
-          '<div class="rv-author"><div class="rv-av">'+r.name.charAt(0)+'</div>'+
-          '<div><div class="rv-nm">'+r.name+'</div><div class="rv-sb">'+r.role+'</div></div></div></div>'
-        ).join('');
+    // Apply business hours
+    if (settings.hours && Array.isArray(settings.hours)) {
+      const hoursContainer = document.querySelector('[data-ws="hours"]');
+      if (hoursContainer) {
+        const today = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][new Date().getDay()];
+        hoursContainer.innerHTML = settings.hours.map(h => {
+          const isToday = h.day === today;
+          const time = h.closed ? 'Closed' : `${h.open} – ${h.close}`;
+          return `<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--b1);${isToday?'color:var(--red);font-weight:700;':''}">
+            <span style="font-size:12px;">${h.day}</span>
+            <span style="font-size:12px;font-weight:600;">${time}</span>
+          </div>`;
+        }).join('');
       }
     }
-  }catch(e){console.warn('Settings load failed:',e);}
+
+    // Apply reviews
+    if (settings.reviews && Array.isArray(settings.reviews)) {
+      const reviewsContainer = document.querySelector('[data-ws="reviews"]');
+      if (reviewsContainer) {
+        reviewsContainer.innerHTML = settings.reviews.map(r => {
+          const stars = '★'.repeat(r.stars || 5) + '☆'.repeat(5-(r.stars||5));
+          const initials = r.name.split(' ').map(w=>w[0]).join('').substring(0,2).toUpperCase();
+          return `<div class="tc">
+            <div class="tc-s">${stars}</div>
+            <div class="tc-q">"</div>
+            <p class="tc-t">${r.text}</p>
+            <div class="tc-a">
+              <div class="tc-av">${initials}</div>
+              <div><div class="tc-nm">${r.name}</div><div class="tc-sb">${r.role}</div></div>
+            </div>
+          </div>`;
+        }).join('');
+      }
+    }
+
+  } catch(e) { console.warn('Website settings load failed:', e); }
 })();
 </script>
-
 </body>
 </html>
