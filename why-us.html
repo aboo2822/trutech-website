@@ -271,6 +271,24 @@ footer .fc a:hover{color:var(--red);}
 @media(max-width:768px){.stats-grid{grid-template-columns:1fr 1fr;}.cta-band{padding:64px 18px;}}
 @media(max-width:768px){#cur,#cur-r{position:fixed;width:32px;height:32px;border:1.5px solid var(--red);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:none;opacity:.7;top:0;left:0;}}
 </style>
+<style>
+/* Force cursor:none on ALL interactive elements */
+a,a:hover,a:focus,a:active,a:visited,
+button,button:hover,
+nav a,nav a:hover,
+footer a,footer a:hover,
+.nlinks a,.mm a,.fc a,.fbot a,
+.hbg,.btn-p,.ncta,
+[href],[href]:hover,[onclick] {
+  cursor: none !important;
+}
+@media (max-width: 768px) {
+  a,button,nav a,footer a,.hbg,[href],[onclick] {
+    cursor: auto !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+</style>
 </head>
 <body>
 <div id="cur"></div><div id="cur-r"></div>
