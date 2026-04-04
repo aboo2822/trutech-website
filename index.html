@@ -228,7 +228,7 @@ nav.on{background:rgba(9,9,11,.95);backdrop-filter:blur(18px);border-bottom-colo
 .nlinks a:hover{color:var(--red);}
 .ncta{background:var(--red);color:#fff;font-family:var(--fd);font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:9px 20px;border:none;cursor:none;transition:all .2s;text-decoration:none;}
 .ncta:hover{background:var(--red2);transform:translate(-2px,-2px);box-shadow:2px 2px 0 rgba(196,30,30,.3);}
-.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;-webkit-tap-highlight-color:transparent;}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:none;padding:8px;-webkit-tap-highlight-color:transparent;}
 .hbg span{width:22px;height:2px;background:var(--white);display:block;}
 
 /* HERO */
@@ -515,7 +515,7 @@ footer .fc a:hover{color:var(--red);}
 @media(max-width:768px){
   nav{padding:10px 14px;}
   .nlinks,.ncta{display:none;}
-  .hbg{display:flex;cursor:pointer;}
+  .hbg{display:flex;cursor:none;}
   /* Show book button on mobile but smaller */
   .ncta{display:block!important;}
   .btn-p{font-size:11px;padding:9px 14px;letter-spacing:1px;}
@@ -539,7 +539,7 @@ footer .fc a:hover{color:var(--red);}
 .qmhead{padding:22px 24px 16px;border-bottom:1px solid #1e2024;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
 .qmtitle{font-family:"Barlow Condensed",sans-serif;font-size:22px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;}
 .qmsub{font-size:12px;color:#9ca3af;margin-top:3px;}
-.qmclose{background:none;border:1px solid #2b2f35;color:#f0eeea;width:32px;height:32px;cursor:pointer;font-size:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.qmclose{background:none;border:1px solid #2b2f35;color:#f0eeea;width:32px;height:32px;cursor:none;font-size:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s;}
 .qmclose:hover{border-color:#c41e1e;color:#c41e1e;}
 .qmbody{padding:20px 24px;}
 .qfg{display:flex;flex-direction:column;gap:5px;margin-bottom:13px;}
@@ -549,11 +549,11 @@ footer .fc a:hover{color:var(--red);}
 .qfi::placeholder{color:#6b7280;}
 .qfsel option{background:#0f1012;}
 .qpills{display:flex;flex-wrap:wrap;gap:6px;}
-.qpill{background:#09090b;border:1px solid #2b2f35;color:#9ca3af;font-family:"DM Mono",monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:6px 12px;cursor:pointer;transition:all .2s;}
+.qpill{background:#09090b;border:1px solid #2b2f35;color:#9ca3af;font-family:"DM Mono",monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:6px 12px;cursor:none;transition:all .2s;}
 .qpill:hover{border-color:#c41e1e;color:#f0eeea;}
 .qpill.sel{background:rgba(196,30,30,.15);border-color:#c41e1e;color:#f0eeea;}
 .qmfoot{padding:16px 24px;border-top:1px solid #1e2024;}
-.qsubmit{width:100%;background:#c41e1e;color:#fff;font-family:"Barlow Condensed",sans-serif;font-size:16px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:14px;border:none;cursor:pointer;transition:all .25s;}
+.qsubmit{width:100%;background:#c41e1e;color:#fff;font-family:"Barlow Condensed",sans-serif;font-size:16px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:14px;border:none;cursor:none;transition:all .25s;}
 .qsubmit:hover{background:#e02020;}
 .qnote{font-family:"DM Mono",monospace;font-size:9px;color:#6b7280;letter-spacing:1px;text-align:center;margin-top:10px;}
 .qsuccess{display:none;text-align:center;padding:24px;}
@@ -700,9 +700,9 @@ footer .fc a:hover{color:var(--red);}
     <p class="svc-hr">Phone, tablet, or computer — we handle it all with premium parts and a 90-day warranty on every repair.</p>
   </div>
   <div class="sg">
-    <div class="sc rv" onclick="window.location.href='booking.html?service={svc_id}'" style="cursor:pointer;"><span class="sc-n">01</span><span class="sc-i">📱</span><div class="sc-nm">Screen Repair</div><p class="sc-d">Cracked, shattered, or unresponsive screens replaced with OEM-quality parts. All iPhone, Samsung and Android models.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="screen">$79</span></div><div class="sc-ar">→</div></div>
-    <div class="sc rv d1" onclick="window.location.href='booking.html?service={svc_id}'" style="cursor:pointer;"><span class="sc-n">02</span><span class="sc-i">🔋</span><div class="sc-nm">Battery Swap</div><p class="sc-d">Draining fast? We swap batteries in under 30 minutes and restore all-day battery life to your device.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="battery">$49</span></div><div class="sc-ar">→</div></div>
-    <div class="sc rv d2" onclick="window.location.href='booking.html?service={svc_id}'" style="cursor:pointer;"><span class="sc-n">03</span><span class="sc-i">💧</span><div class="sc-nm">Water Damage</div><p class="sc-d">Dropped in water? Our ultrasonic cleaning process recovers most water-damaged phones and tablets.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="water">$89</span></div><div class="sc-ar">→</div></div>
+    <div class="sc rv" onclick="window.location.href='booking.html?service={svc_id}'" style="cursor:none;"><span class="sc-n">01</span><span class="sc-i">📱</span><div class="sc-nm">Screen Repair</div><p class="sc-d">Cracked, shattered, or unresponsive screens replaced with OEM-quality parts. All iPhone, Samsung and Android models.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="screen">$79</span></div><div class="sc-ar">→</div></div>
+    <div class="sc rv d1" onclick="window.location.href='booking.html?service={svc_id}'" style="cursor:none;"><span class="sc-n">02</span><span class="sc-i">🔋</span><div class="sc-nm">Battery Swap</div><p class="sc-d">Draining fast? We swap batteries in under 30 minutes and restore all-day battery life to your device.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="battery">$49</span></div><div class="sc-ar">→</div></div>
+    <div class="sc rv d2" onclick="window.location.href='booking.html?service={svc_id}'" style="cursor:none;"><span class="sc-n">03</span><span class="sc-i">💧</span><div class="sc-nm">Water Damage</div><p class="sc-d">Dropped in water? Our ultrasonic cleaning process recovers most water-damaged phones and tablets.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="water">$89</span></div><div class="sc-ar">→</div></div>
     <div class="sc rv"><span class="sc-n">04</span><span class="sc-i">💻</span><div class="sc-nm">Computer Repair</div><p class="sc-d">Slow PC, virus removal, hardware upgrades, broken screens — Mac and Windows laptops and desktops.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="computer">$69</span></div><div class="sc-ar">→</div></div>
     <div class="sc rv d1"><span class="sc-n">05</span><span class="sc-i">📲</span><div class="sc-nm">Tablet Repair</div><p class="sc-d">iPad and Android tablet screen repairs, battery replacements, charging port fixes and software issues.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="tablet">$59</span></div><div class="sc-ar">→</div></div>
     <div class="sc rv d2"><span class="sc-n">06</span><span class="sc-i">💾</span><div class="sc-nm">Data Recovery</div><p class="sc-d">Dead device? Don't lose your photos. Our advanced recovery tools retrieve data that others can't reach.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="data">$99</span></div><div class="sc-ar">→</div></div>
