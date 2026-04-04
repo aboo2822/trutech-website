@@ -427,21 +427,11 @@ function runCounters() {
   });
 }
 
-// Use IntersectionObserver on stats-grid (correct class name)
-var statsGrid = document.querySelector('.stats-grid');
-if (statsGrid && 'IntersectionObserver' in window) {
-  var hasRun = false;
-  var obs = new IntersectionObserver(function(entries) {
-    if (entries[0].isIntersecting && !hasRun) {
-      hasRun = true;
-      runCounters();
-      obs.disconnect();
-    }
-  }, { threshold: 0.1 });
-  obs.observe(statsGrid);
+// Stats are visible on page load - run immediately after DOM ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', function() { setTimeout(runCounters, 300); });
 } else {
-  // Fallback: run after short delay
-  setTimeout(runCounters, 500);
+  setTimeout(runCounters, 300);
 }
 
 // Cursor
