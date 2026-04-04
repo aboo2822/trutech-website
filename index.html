@@ -1115,7 +1115,7 @@ async function submitQuote() {
       const tbody=document.getElementById('price-tbody');
       if(tbody){
         tbody.innerHTML=S.priceTable.map(row=>
-          '<tr><td>'+row.device+'</td><td>'+row.repair+'</td><td class="price-hi">'+row.price+'</td><td>'+row.time+'</td></tr>'
+          '<tr><td class="device">'+row.device+'</td><td class="detail">'+row.repair+'</td><td class="price">'+row.price+'</td><td class="detail">'+row.time+'</td></tr>'
         ).join('');
       }
     }
@@ -1146,7 +1146,7 @@ async function submitQuote() {
           const desc=banner.querySelector('[data-ws="promo-desc"]');
           const btn=banner.querySelector('[data-ws="promo-btn"]');
           if(lbl&&S.promo.label)lbl.textContent=S.promo.label;
-          if(hl&&S.promo.headline)hl.textContent=S.promo.headline;
+          if(hl&&S.promo.headline)hl.innerHTML=S.promo.headline;
           if(desc&&S.promo.desc)desc.textContent=S.promo.desc;
           if(btn&&S.promo.btn)btn.textContent=S.promo.btn;
         }

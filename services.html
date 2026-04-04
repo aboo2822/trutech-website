@@ -467,7 +467,7 @@ footer .fc a:hover{color:var(--red);}
   <div style="overflow-x:auto;">
     <table class="price-table">
       <thead><tr><th>Device</th><th>Repair</th><th>Est. Price</th><th>Time</th></tr></thead>
-      <tbody>
+      <tbody id="price-tbody">
         <tr><td class="device">iPhone 15 / 15 Pro</td><td class="detail">Screen Replacement</td><td class="price">$149–$229</td><td class="detail">45 min</td></tr>
         <tr><td class="device">iPhone 13 / 14</td><td class="detail">Screen Replacement</td><td class="detail">OEM Screen</td><td class="price">$109–$179</td></tr>
         <tr><td class="device">iPhone 11 / 12</td><td class="detail">Screen Replacement</td><td class="price">$89–$139</td><td class="detail">30–45 min</td></tr>
@@ -547,3 +547,55 @@ document.addEventListener("mousemove",e=>{mx=e.clientX;my=e.clientY;cur.style.le
 document.querySelectorAll("a,button,.svc-card,.reason-card").forEach(el=>{
   el.addEventListener("mouseenter",()=>{cur.style.width="18px";cur.style.height="18px";cr.style.width="56px";cr.style.height="56px";cr.style.opacity="1";});
   el.addEventListene
+r.addEventListener("mouseleave",()=>{cur.style.width="10px";cur.style.height="10px";cr.style.width="32px";cr.style.height="32px";cr.style.opacity=".6";});
+});
+</script>
+
+<script>
+(async function(){
+  const SB_URL='https://gvawcnwzvoavyxtedecd.supabase.co';
+  const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd2YXdjbnd6dm9hdnl4dGVkZWNkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ1NzU4NTEsImV4cCI6MjA5MDE1MTg1MX0.EycPpmdJypdY4dVnqjEM0WluWldRSs0UTMRC9x98-5Y';
+  try{
+    const res=await fetch(SB_URL+'/rest/v1/website_settings?select=key,value',{
+      headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY}
+    });
+    if(!res.ok)return;
+    const rows=await res.json();
+    if(!rows||!rows.length)return;
+    const S={};
+    rows.forEach(r=>{try{S[r.key]=JSON.parse(r.value);}catch{S[r.key]=r.value;}});
+
+    // Service card prices (class="svc-price" data-ws-price="id")
+    if(S.prices&&Array.isArray(S.prices)){
+      S.prices.forEach(svc=>{
+        document.querySelectorAll('[data-ws-price="'+svc.id+'"]').forEach(el=>el.textContent=svc.from);
+      });
+    }
+
+    // Price reference table
+    if(S.priceTable&&Array.isArray(S.priceTable)){
+      const tbody=document.getElementById('price-tbody');
+      if(tbody){
+        tbody.innerHTML=S.priceTable.map(function(row){
+          return '<tr><td class="device">'+row.device+'</td><td class="detail">'+row.repair+'</td><td class="price">'+row.price+'</td><td class="detail">'+row.time+'</td></tr>';
+        }).join('');
+      }
+    }
+
+    // Contact info
+    if(S.phone){
+      document.querySelectorAll('[data-ws="phone"]').forEach(function(el){el.textContent=S.phone;});
+      document.querySelectorAll('a[href^="tel:"]').forEach(function(el){
+        el.href='tel:'+S.phone.replace(/\D/g,'');
+        if(el.textContent.match(/^\(?\d/))el.textContent=S.phone;
+      });
+    }
+    if(S.email){
+      document.querySelectorAll('[data-ws="email"]').forEach(function(el){el.textContent=S.email;});
+      document.querySelectorAll('a[href^="mailto:"]').forEach(function(el){el.href='mailto:'+S.email;});
+    }
+  }catch(e){console.warn('Settings failed:',e);}
+})();
+</script>
+</body>
+</html>
