@@ -228,7 +228,7 @@ nav.on{background:rgba(9,9,11,.95);backdrop-filter:blur(18px);border-bottom-colo
 .nlinks a:hover{color:var(--red);}
 .ncta{background:var(--red);color:#fff;font-family:var(--fd);font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;padding:9px 20px;border:none;cursor:none;transition:all .2s;text-decoration:none;}
 .ncta:hover{background:var(--red2);transform:translate(-2px,-2px);box-shadow:2px 2px 0 rgba(196,30,30,.3);}
-.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:none;padding:4px;}
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;-webkit-tap-highlight-color:transparent;}
 .hbg span{width:22px;height:2px;background:var(--white);display:block;}
 
 /* HERO */
@@ -513,9 +513,12 @@ footer .fc a:hover{color:var(--red);}
   .ft{grid-template-columns:1fr 1fr;gap:32px;}
 }
 @media(max-width:768px){
-  nav{padding:12px 18px;}
+  nav{padding:10px 14px;}
   .nlinks,.ncta{display:none;}
-  .hbg{display:flex;}
+  .hbg{display:flex;cursor:pointer;}
+  /* Show book button on mobile but smaller */
+  .ncta{display:block!important;}
+  .btn-p{font-size:11px;padding:9px 14px;letter-spacing:1px;}
   .hero{padding:72px 18px 100px;}.services,.why,.process,.devices,.testimonials,.booking{padding:72px 18px;}
   .svc-h{flex-direction:column;align-items:flex-start;}
   .sg,.ps-grid,.tg{grid-template-columns:1fr;}
@@ -697,9 +700,9 @@ footer .fc a:hover{color:var(--red);}
     <p class="svc-hr">Phone, tablet, or computer — we handle it all with premium parts and a 90-day warranty on every repair.</p>
   </div>
   <div class="sg">
-    <div class="sc rv"><span class="sc-n">01</span><span class="sc-i">📱</span><div class="sc-nm">Screen Repair</div><p class="sc-d">Cracked, shattered, or unresponsive screens replaced with OEM-quality parts. All iPhone, Samsung and Android models.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="screen">$79</span></div><div class="sc-ar">→</div></div>
-    <div class="sc rv d1"><span class="sc-n">02</span><span class="sc-i">🔋</span><div class="sc-nm">Battery Swap</div><p class="sc-d">Draining fast? We swap batteries in under 30 minutes and restore all-day battery life to your device.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="battery">$49</span></div><div class="sc-ar">→</div></div>
-    <div class="sc rv d2"><span class="sc-n">03</span><span class="sc-i">💧</span><div class="sc-nm">Water Damage</div><p class="sc-d">Dropped in water? Our ultrasonic cleaning process recovers most water-damaged phones and tablets.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="water">$89</span></div><div class="sc-ar">→</div></div>
+    <div class="sc rv" onclick="window.location.href='booking.html?service={svc_id}'" style="cursor:pointer;"><span class="sc-n">01</span><span class="sc-i">📱</span><div class="sc-nm">Screen Repair</div><p class="sc-d">Cracked, shattered, or unresponsive screens replaced with OEM-quality parts. All iPhone, Samsung and Android models.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="screen">$79</span></div><div class="sc-ar">→</div></div>
+    <div class="sc rv d1" onclick="window.location.href='booking.html?service={svc_id}'" style="cursor:pointer;"><span class="sc-n">02</span><span class="sc-i">🔋</span><div class="sc-nm">Battery Swap</div><p class="sc-d">Draining fast? We swap batteries in under 30 minutes and restore all-day battery life to your device.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="battery">$49</span></div><div class="sc-ar">→</div></div>
+    <div class="sc rv d2" onclick="window.location.href='booking.html?service={svc_id}'" style="cursor:pointer;"><span class="sc-n">03</span><span class="sc-i">💧</span><div class="sc-nm">Water Damage</div><p class="sc-d">Dropped in water? Our ultrasonic cleaning process recovers most water-damaged phones and tablets.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="water">$89</span></div><div class="sc-ar">→</div></div>
     <div class="sc rv"><span class="sc-n">04</span><span class="sc-i">💻</span><div class="sc-nm">Computer Repair</div><p class="sc-d">Slow PC, virus removal, hardware upgrades, broken screens — Mac and Windows laptops and desktops.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="computer">$69</span></div><div class="sc-ar">→</div></div>
     <div class="sc rv d1"><span class="sc-n">05</span><span class="sc-i">📲</span><div class="sc-nm">Tablet Repair</div><p class="sc-d">iPad and Android tablet screen repairs, battery replacements, charging port fixes and software issues.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="tablet">$59</span></div><div class="sc-ar">→</div></div>
     <div class="sc rv d2"><span class="sc-n">06</span><span class="sc-i">💾</span><div class="sc-nm">Data Recovery</div><p class="sc-d">Dead device? Don't lose your photos. Our advanced recovery tools retrieve data that others can't reach.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="data">$99</span></div><div class="sc-ar">→</div></div>
@@ -734,7 +737,7 @@ footer .fc a:hover{color:var(--red);}
   <div class="dcta-bg">Repair</div>
   <div class="dcta-in">
     <div class="sl">Limited Offer</div>
-    <h2 class="st">Free Device And Port Cleaning<br>With Every Repair</h2>
+    <h2 class="st">Free Screen Protector<br>With Every Screen Repair</h2>
     <p data-ws="promo-desc">Book any screen replacement this month and get a premium tempered glass screen protector installed free. A $25 value.</p>
     <a href="booking.html" class="btn-dk">Claim This Offer</a>
   </div>
@@ -791,7 +794,7 @@ footer .fc a:hover{color:var(--red);}
       </div>
       <p>Cape Breton's trusted phone, tablet and computer repair specialists. Serving Cheticamp and the Cabot Trail.</p>
     </div>
-    <div class="fc"><div class="fct">Services</div><a href="services.html">Screen Repair</a><a href="services.html">Battery Swap</a><a href="services.html">Water Damage</a><a href="services.html">Computer Repair</a><a href="services.html">Tablet Repair</a><a href="services.html">Data Recovery</a></div>
+    <div class="fc"><div class="fct">Services</div><a href="services.html#screen">Screen Repair</a><a href="services.html#battery">Battery Swap</a><a href="services.html#water">Water Damage</a><a href="services.html#computer">Computer Repair</a><a href="services.html#tablet">Tablet Repair</a><a href="services.html#data">Data Recovery</a></div>
     <div class="fc"><div class="fct">Devices</div><a href="#devices">Apple iPhone</a><a href="#devices">Samsung Galaxy</a><a href="#devices">Google Pixel</a><a href="#devices">iPad & Tablets</a><a href="#devices">Windows PC</a><a href="#devices">MacBook</a></div>
     <div class="fc"><div class="fct">Company</div><a href="why-us.html">About Us</a><a href="#testimonials">Reviews</a><a href="booking.html">Contact</a><a href="#">Warranty Policy</a><a href="#">Privacy Policy</a></div>
   </div>
