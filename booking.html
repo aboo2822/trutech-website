@@ -183,7 +183,7 @@ nav{padding:14px 40px;display:flex;align-items:center;justify-content:space-betw
 .page-tag::before{content:"";width:24px;height:1px;background:var(--red);}
 .page-title{font-family:var(--fd);font-size:clamp(40px,7vw,72px);font-weight:900;text-transform:uppercase;line-height:.92;letter-spacing:-1px;margin-bottom:12px;}
 .page-title em{font-style:italic;color:var(--red);}
-.layout{display:grid;grid-template-columns:1fr 320px;gap:36px;align-items:start;margin-top:0;padding-top:0;}
+.layout{display:grid;grid-template-columns:1fr minmax(0,460px);gap:24px;align-items:start;margin-top:0;padding-top:0;}
 
 /* LEFT INFO */
 .info-card{background:var(--s1);border:1px solid var(--b1);padding:28px;margin-bottom:16px;}
@@ -200,7 +200,7 @@ nav{padding:14px 40px;display:flex;align-items:center;justify-content:space-betw
 .promise-item::before{content:"✓";color:var(--green);font-weight:700;flex-shrink:0;}
 
 /* BOOKING FORM */
-.booking-card{background:var(--s1);border:1px solid var(--b1);border-top:3px solid var(--red);}
+.booking-card{background:var(--s1);border:1px solid var(--b1);border-top:3px solid var(--red);overflow:hidden;min-width:0;}
 .booking-step{display:none;padding:28px;}
 .booking-step.active{display:block;}
 .step-header{margin-bottom:20px;}
@@ -219,9 +219,9 @@ nav{padding:14px 40px;display:flex;align-items:center;justify-content:space-betw
 .cal-nav-btn{background:var(--bg);border:1px solid var(--b2);color:var(--white);width:34px;height:34px;cursor:none;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .2s;flex-shrink:0;}
 .cal-nav-btn:hover{border-color:var(--red);color:var(--red);}
 .cal-month{font-family:var(--fd);font-size:18px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;flex:1;text-align:center;}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:20px;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:16px;width:100%;}
 .cal-day-name{font-family:var(--fm);font-size:9px;color:var(--g1);letter-spacing:1px;text-align:center;padding:6px 0;text-transform:uppercase;}
-.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:14px;font-weight:600;cursor:default;color:var(--g1);transition:all .2s;border:1px solid transparent;position:relative;min-height:44px;}
+.cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:6px;font-size:12px;font-weight:600;cursor:none;color:var(--g1);transition:all .2s;border:1px solid transparent;position:relative;}
 .cal-day.has-slots{background:rgba(34,197,94,.08);border-color:rgba(34,197,94,.2);color:var(--white);cursor:none;}
 .cal-day.has-slots:hover{background:rgba(34,197,94,.18);border-color:var(--green);}
 .cal-day.selected{background:var(--red);border-color:var(--red);color:#fff;}
@@ -290,6 +290,16 @@ footer{background:var(--s1);border-top:1px solid var(--b1);padding:24px 40px;dis
 /* Custom cursor */
 #cur{position:fixed;width:10px;height:10px;background:#c41e1e;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
 #cur-r{position:fixed;width:34px;height:34px;border:1.5px solid #c41e1e;border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .12s;opacity:.4;}
+
+/* Calendar overflow fix */
+.booking-card,
+.booking-card *{
+  max-width:100%;
+  box-sizing:border-box;
+}
+.cal-grid{
+  width:100% !important;
+}
 </style>
 </head>
 <body><style>
@@ -1229,26 +1239,6 @@ if (svcParam) {
 
   } catch(e) { console.warn('Website settings load failed:', e); }
 })();
-</script>
-<script>
-// ── CURSOR FIX for all pages ──
-const _cur=document.getElementById('cur'),_crr=document.getElementById('cur-r');
-if(_cur&&_crr){
-  let _mx=0,_my=0,_rx=0,_ry=0;
-  document.addEventListener('mousemove',e=>{
-    _mx=e.clientX;_my=e.clientY;
-    _cur.style.left=_mx+'px';_cur.style.top=_my+'px';
-  });
-  (function _loop(){
-    _rx+=(_mx-_rx)*.15;_ry+=(_my-_ry)*.15;
-    _crr.style.left=_rx+'px';_crr.style.top=_ry+'px';
-    requestAnimationFrame(_loop);
-  })();
-  document.querySelectorAll('a,button,.svc-card,.reason-card,.sc,.dt,.tc,.wi,.btn-p,.btn-o,.btn-dk,.sp,.slot-btn,.cal-day').forEach(el=>{
-    el.addEventListener('mouseenter',()=>{_cur.style.width='18px';_cur.style.height='18px';_crr.style.width='56px';_crr.style.height='56px';_crr.style.opacity='1';});
-    el.addEventListener('mouseleave',()=>{_cur.style.width='10px';_cur.style.height='10px';_crr.style.width='34px';_crr.style.height='34px';_crr.style.opacity='.4';});
-  });
-}
 </script>
 
 </body>
