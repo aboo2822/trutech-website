@@ -162,9 +162,9 @@ if(!localStorage.getItem('rt_url'))localStorage.setItem('rt_url','https://gvawcn
 :root{--bg:#09090b;--s1:#0f1012;--s2:#161719;--b1:#1e2024;--b2:#2b2f35;--red:#c41e1e;--red2:#e02020;--white:#f0eeea;--g1:#6b7280;--g2:#9ca3af;--fd:"Barlow Condensed",sans-serif;--fb:"Instrument Sans",sans-serif;--fm:"DM Mono",monospace;}
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--white);font-family:var(--fb);overflow-x:hidden;cursor:none;}
-#cur{position:fixed;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
-#cur-r{position:fixed;width:34px;height:34px;border:1.5px solid var(--red);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:none;opacity:.6;}
-#cur-r{position:fixed;width:34px;height:34px;border:1.5px solid var(--red);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:none;opacity:.6;}
+#cur{position:fixed;width:8px;height:8px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:none;top:0;left:0;}
+#cur-r{position:fixed;width:32px;height:32px;border:1.5px solid var(--red);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:none;opacity:.7;top:0;left:0;}
+#cur-r{position:fixed;width:32px;height:32px;border:1.5px solid var(--red);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:none;opacity:.7;top:0;left:0;}
 nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:14px 40px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--b1);background:rgba(9,9,11,.97);backdrop-filter:blur(18px);transition:all .4s;}
 .nlogo{display:flex;align-items:center;gap:10px;text-decoration:none;}
 .nlogo img{width:64px;height:64px;object-fit:contain;}
@@ -269,7 +269,7 @@ footer .fc a:hover{color:var(--red);}
 .btn-dk:hover{background:#1a1a1e;transform:translate(-3px,-3px);box-shadow:3px 3px 0 rgba(0,0,0,.35);}
 @media(max-width:1024px){.reasons-grid{grid-template-columns:1fr;}.stats-grid{grid-template-columns:1fr 1fr;}.tg{grid-template-columns:1fr;}}
 @media(max-width:768px){.stats-grid{grid-template-columns:1fr 1fr;}.cta-band{padding:64px 18px;}}
-@media(max-width:768px){#cur,#cur-r{display:none!important;}}
+@media(max-width:768px){#cur,#cur-r{position:fixed;width:32px;height:32px;border:1.5px solid var(--red);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:none;opacity:.7;top:0;left:0;}}
 </style>
 </head>
 <body>
@@ -398,33 +398,17 @@ footer .fc a:hover{color:var(--red);}
   <div class="fbot"><span class="fcpy">© 2026 Cheticamp TruTech Repairs — Cape Breton, NS</span><div class="fsoc"><a class="sb2" href="#">📘</a><a class="sb2" href="#">📸</a><a class="sb2" href="#">🔍</a></div></div>
 </footer>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-const cur=document.getElementById("cur"),cr=document.getElementById("cur-r");
+const cur=document.getElementById("cur");
+const cr=document.getElementById("cur-r");
 if(cur&&cr){
-  let mx=0,my=0;
   document.addEventListener("mousemove",function(e){
-    mx=e.clientX;my=e.clientY;
-    cur.style.left=mx+"px";cur.style.top=my+"px";
-    cr.style.left=mx+"px";cr.style.top=my+"px";
+    var x=e.clientX+"px", y=e.clientY+"px";
+    cur.style.left=x; cur.style.top=y;
+    cr.style.left=x;  cr.style.top=y;
   });
-document.querySelectorAll("a,button,.reason-card,.stat-card,.team-card").forEach(el=>{
-  el.addEventListener("mouseenter",()=>{cur.style.width="18px";cur.style.height="18px";cr.style.width="56px";cr.style.height="56px";cr.style.opacity="1";});
-  el.addEventListener("mouseleave",()=>{cur.style.width="10px";cur.style.height="10px";cr.style.width="34px";cr.style.height="34px";cr.style.opacity=".4";});
-});
-function toggleMenu(){document.getElementById("mm").classList.toggle("open");}
-// Stats are hardcoded
-
-// Cursor
-const cur=document.getElementById("cur"), cr=document.getElementById("cur-r");
-if(cur && cr){
-  let mx=0,my=0;
-  document.addEventListener("mousemove",function(e){
-    mx=e.clientX;my=e.clientY;
-    cur.style.left=mx+"px";cur.style.top=my+"px";
-    cr.style.left=mx+"px";cr.style.top=my+"px";
-  });
-  document.querySelectorAll("a,button,.reason-card").forEach(function(el){
-    el.addEventListener("mouseenter",function(){cur.style.width="18px";cur.style.height="18px";cr.style.width="56px";cr.style.height="56px";cr.style.opacity="1";});
-    el.addEventListener("mouseleave",function(){cur.style.width="10px";cur.style.height="10px";cr.style.width="32px";cr.style.height="32px";cr.style.opacity=".6";});
+  document.querySelectorAll("a,button,.sc,.svc-card,.reason-card,.tc,.stat-card").forEach(function(el){
+    el.addEventListener("mouseenter",function(){cur.style.opacity="0.5";});
+    el.addEventListener("mouseleave",function(){cur.style.opacity="1";});
   });
 }
 </script>

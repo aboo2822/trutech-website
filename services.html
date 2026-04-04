@@ -170,8 +170,8 @@ if(!localStorage.getItem('rt_url'))localStorage.setItem('rt_url','https://gvawcn
 }
 html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--white);font-family:var(--fb);overflow-x:hidden;cursor:none;}
-#cur{position:fixed;width:10px;height:10px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .2s,height .2s;}
-#cur-r{position:fixed;width:34px;height:34px;border:1.5px solid var(--red);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:none;opacity:.6;}
+#cur{position:fixed;width:8px;height:8px;background:var(--red);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:none;top:0;left:0;}
+#cur-r{position:fixed;width:32px;height:32px;border:1.5px solid var(--red);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:none;opacity:.7;top:0;left:0;}
 nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:14px 40px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--b1);background:rgba(9,9,11,.97);backdrop-filter:blur(18px);transition:all .4s;}
 .nlogo{display:flex;align-items:center;gap:10px;text-decoration:none;}
 .nlogo img{width:64px;height:64px;object-fit:contain;}
@@ -540,15 +540,19 @@ footer .fc a:hover{color:var(--red);}
   </div>
 </footer>
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-const cur=document.getElementById("cur"),cr=document.getElementById("cur-r");
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener("mousemove",e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+"px";cur.style.top=my+"px";});
-(function loop(){rx+=(mx-rx)*.15;ry+=(my-ry)*.15;cr.style.left=rx+"px";cr.style.top=ry+"px";requestAnimationFrame(loop);})();
-document.querySelectorAll("a,button,.svc-card,.reason-card").forEach(el=>{
-  el.addEventListener("mouseenter",()=>{cur.style.width="18px";cur.style.height="18px";cr.style.width="56px";cr.style.height="56px";cr.style.opacity="1";});
-  el.addEventListene
-r.addEventListener("mouseleave",()=>{cur.style.width="10px";cur.style.height="10px";cr.style.width="32px";cr.style.height="32px";cr.style.opacity=".6";});
-});
+const cur=document.getElementById("cur");
+const cr=document.getElementById("cur-r");
+if(cur&&cr){
+  document.addEventListener("mousemove",function(e){
+    var x=e.clientX+"px", y=e.clientY+"px";
+    cur.style.left=x; cur.style.top=y;
+    cr.style.left=x;  cr.style.top=y;
+  });
+  document.querySelectorAll("a,button,.sc,.svc-card,.reason-card,.tc,.stat-card").forEach(function(el){
+    el.addEventListener("mouseenter",function(){cur.style.opacity="0.5";});
+    el.addEventListener("mouseleave",function(){cur.style.opacity="1";});
+  });
+}
 </script>
 
 <script>
