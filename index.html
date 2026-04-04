@@ -559,6 +559,24 @@ footer .fc a:hover{color:var(--red);}
 .qsuccess{display:none;text-align:center;padding:24px;}
 .qsuccess.show{display:block;}
 </style>
+<style>
+/* Force cursor:none on ALL interactive elements */
+a,a:hover,a:focus,a:active,a:visited,
+button,button:hover,
+nav a,nav a:hover,
+footer a,footer a:hover,
+.nlinks a,.mm a,.fc a,.fbot a,
+.hbg,.btn-p,.ncta,
+[href],[href]:hover,[onclick] {
+  cursor: none !important;
+}
+@media (max-width: 768px) {
+  a,button,nav a,footer a,.hbg,[href],[onclick] {
+    cursor: auto !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+</style>
 </head>
 <body>
 <div id="cur"></div><div id="cur-r"></div>
