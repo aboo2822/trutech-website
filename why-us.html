@@ -405,32 +405,43 @@ document.querySelectorAll("a,button,.reason-card,.stat-card,.team-card").forEach
   el.addEventListener("mouseleave",()=>{cur.style.width="10px";cur.style.height="10px";cr.style.width="34px";cr.style.height="34px";cr.style.opacity=".4";});
 });
 function toggleMenu(){document.getElementById("mm").classList.toggle("open");}
-// Counter animation
-function animateCounters(){
-  document.querySelectorAll(".counter").forEach(el=>{
-    const target=parseInt(el.dataset.target);
-    const suffix=el.dataset.suffix||"";
-    let cur=0;const step=Math.ceil(target/60);
-    const t=setInterval(()=>{cur=Math.min(cur+step,target);el.textContent=cur+suffix;if(cur>=target)clearInterval(t);},30);
-  
+// Counter animation - runs immediately since stats are visible on load
+function animateCounter(el) {
+  var target = parseInt(el.getAttribute('data-target')) || 0;
+  var suffix = el.getAttribute('data-suffix') || '';
+  var duration = 1800;
+  var steps = 60;
+  var stepTime = Math.floor(duration / steps);
+  var current = 0;
+  var increment = Math.ceil(target / steps);
+  var timer = setInterval(function() {
+    current = Math.min(current + increment, target);
+    el.textContent = current + suffix;
+    if (current >= target) clearInterval(timer);
+  }, stepTime);
+}
+
+function runCounters() {
+  document.querySelectorAll('.counter').forEach(function(el) {
+    animateCounter(el);
   });
 }
 
-// Trigger counters when stats section scrolls into view
-const statsSection = document.querySelector('.stats');
-if(statsSection){
-  const observer = new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(entry.isIntersecting){
-        animateCounters();
-        observer.disconnect();
-      }
-    });
-  }, {threshold: 0.2});
-  observer.observe(statsSection);
+// Use IntersectionObserver on stats-grid (correct class name)
+var statsGrid = document.querySelector('.stats-grid');
+if (statsGrid && 'IntersectionObserver' in window) {
+  var hasRun = false;
+  var obs = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting && !hasRun) {
+      hasRun = true;
+      runCounters();
+      obs.disconnect();
+    }
+  }, { threshold: 0.1 });
+  obs.observe(statsGrid);
 } else {
-  // Fallback - run on load
-  window.addEventListener('load', animateCounters);
+  // Fallback: run after short delay
+  setTimeout(runCounters, 500);
 }
 
 // Cursor
