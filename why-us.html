@@ -301,10 +301,10 @@ footer .fc a:hover{color:var(--red);}
 
 <!-- STATS -->
 <div class="stats-grid" style="border-top:1px solid var(--b1);border-bottom:1px solid var(--b1);">
-  <div class="stat-card"><div class="stat-num"><span class="counter" data-target="5000" data-suffix="+">0+</span></div><div class="stat-label">Devices Repaired</div></div>
-  <div class="stat-card"><div class="stat-num"><span class="counter" data-target="4" data-suffix=".9★">0</span></div><div class="stat-label">Google Rating</div></div>
-  <div class="stat-card"><div class="stat-num"><span class="counter" data-target="30" data-suffix=" min">0 min</span></div><div class="stat-label">Avg Repair Time</div></div>
-  <div class="stat-card"><div class="stat-num"><span class="counter" data-target="90" data-suffix=" day">0 day</span></div><div class="stat-label">Warranty on Every Repair</div></div>
+  <div class="stat-card"><div class="stat-num">5,000+</div><div class="stat-label">Devices Repaired</div></div>
+  <div class="stat-card"><div class="stat-num">4.9★</div><div class="stat-label">Google Rating</div></div>
+  <div class="stat-card"><div class="stat-num">30 min</div><div class="stat-label">Avg Repair Time</div></div>
+  <div class="stat-card"><div class="stat-num">90 day</div><div class="stat-label">Warranty on Every Repair</div></div>
 </div>
 
 <!-- TICKER -->
@@ -405,34 +405,7 @@ document.querySelectorAll("a,button,.reason-card,.stat-card,.team-card").forEach
   el.addEventListener("mouseleave",()=>{cur.style.width="10px";cur.style.height="10px";cr.style.width="34px";cr.style.height="34px";cr.style.opacity=".4";});
 });
 function toggleMenu(){document.getElementById("mm").classList.toggle("open");}
-// Counter animation - runs immediately since stats are visible on load
-function animateCounter(el) {
-  var target = parseInt(el.getAttribute('data-target')) || 0;
-  var suffix = el.getAttribute('data-suffix') || '';
-  var duration = 1800;
-  var steps = 60;
-  var stepTime = Math.floor(duration / steps);
-  var current = 0;
-  var increment = Math.ceil(target / steps);
-  var timer = setInterval(function() {
-    current = Math.min(current + increment, target);
-    el.textContent = current + suffix;
-    if (current >= target) clearInterval(timer);
-  }, stepTime);
-}
-
-function runCounters() {
-  document.querySelectorAll('.counter').forEach(function(el) {
-    animateCounter(el);
-  });
-}
-
-// Stats are visible on page load - run immediately after DOM ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', function() { setTimeout(runCounters, 300); });
-} else {
-  setTimeout(runCounters, 300);
-}
+// Stats are hardcoded
 
 // Cursor
 const cur=document.getElementById("cur"), cr=document.getElementById("cur-r");
