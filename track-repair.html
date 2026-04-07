@@ -163,8 +163,8 @@ html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--white);font-family:var(--fb);min-height:100vh;}
 nav{padding:14px 40px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--b1);background:rgba(9,9,11,.97);backdrop-filter:blur(18px);position:sticky;top:0;z-index:50;}
 .nlogo{display:flex;align-items:center;gap:10px;text-decoration:none;}
-.nlogo img{width:38px;height:38px;object-fit:contain;border-radius:6px;}
-.nname{font-family:var(--fd);font-size:16px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--white);line-height:1.1;}
+.nlogo img{width:64px;height:64px;object-fit:contain;}
+.nname{font-family:var(--fd);font-size:17px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--white);line-height:1.1;}
 .nsub{font-family:var(--fm);font-size:9px;color:var(--red);letter-spacing:2px;}
 .nav-link{font-family:var(--fm);font-size:11px;color:var(--g2);text-decoration:none;letter-spacing:1.5px;text-transform:uppercase;transition:color .2s;}
 .nav-link:hover{color:var(--red);}
@@ -298,13 +298,13 @@ nav a,footer a,[href],[onclick]{cursor:none!important;}
   <!-- SEARCH -->
   <div class="search-box">
     <div class="search-box-title">Find Your Repair</div>
-    <div class="search-box-sub">Enter your ticket ID (e.g. RT-1042) or the phone number you provided at drop-off.</div>
+    <div class="search-box-sub">Enter your ticket ID or the phone number you provided at drop-off.</div>
     <div class="search-tabs">
       <button class="search-tab active" onclick="setSearchMode('ticket',this)">By Ticket ID</button>
       <button class="search-tab" onclick="setSearchMode('phone',this)">By Phone Number</button>
     </div>
     <div class="input-row">
-      <input class="si" id="search-input" placeholder="RT-1042" maxlength="20" onkeydown="if(event.key==='Enter')doSearch()">
+      <input class="si" id="search-input" placeholder="Your ticket number" maxlength="20" onkeydown="if(event.key==='Enter')doSearch()">
       <button class="sbtn" onclick="doSearch()">Track →</button>
     </div>
   </div>
@@ -373,7 +373,7 @@ function setSearchMode(mode, el) {
   document.querySelectorAll('.search-tab').forEach(t=>t.classList.remove('active'));
   el.classList.add('active');
   const inp = document.getElementById('search-input');
-  inp.placeholder = mode === 'ticket' ? 'RT-1042' : '(902) 555-0000';
+  inp.placeholder = mode === 'ticket' ? 'Your ticket ID' : 'Your phone number';
   inp.value = '';
   document.getElementById('result-area').classList.remove('show');
   document.getElementById('result-area').innerHTML = '';
@@ -520,26 +520,7 @@ if (ticketParam) {
   doSearch();
 }
 </script>
-<script>
-// ── CURSOR FIX for all pages ──
-const _cur=document.getElementById('cur'),_crr=document.getElementById('cur-r');
-if(_cur&&_crr){
-  let _mx=0,_my=0,_rx=0,_ry=0;
-  document.addEventListener('mousemove',e=>{
-    _mx=e.clientX;_my=e.clientY;
-    _cur.style.left=_mx+'px';_cur.style.top=_my+'px';
-  });
-  (function _loop(){
-    _rx+=(_mx-_rx)*.15;_ry+=(_my-_ry)*.15;
-    _crr.style.left=_rx+'px';_crr.style.top=_ry+'px';
-    requestAnimationFrame(_loop);
-  })();
-  document.querySelectorAll('a,button,.svc-card,.reason-card,.sc,.dt,.tc,.wi,.btn-p,.btn-o,.btn-dk,.sp,.slot-btn,.cal-day').forEach(el=>{
-    el.addEventListener('mouseenter',()=>{_cur.style.width='18px';_cur.style.height='18px';_crr.style.width='56px';_crr.style.height='56px';_crr.style.opacity='1';});
-    el.addEventListener('mouseleave',()=>{_cur.style.width='10px';_cur.style.height='10px';_crr.style.width='34px';_crr.style.height='34px';_crr.style.opacity='.4';});
-  });
-}
-</script>
+
 
 </body>
 </html>
