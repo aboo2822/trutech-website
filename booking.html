@@ -1040,13 +1040,11 @@ async function sendConfirmationEmail(b, ref) {
   if (typeof emailjs === 'undefined') { console.warn('EmailJS not loaded'); return; }
 
   // ── EmailJS config (Zoho CA SMTP) ──────────────────────────────
-  const EJ_KEY = EMAIL_CFG.key || '';          // Public key from RepairTrack settings
+  const EJ_KEY = 'Gm0nsxzaj5OA12KHA';          // EmailJS public key
   const EJ_SVC = 'service_ucfn57p';            // Zoho CA service
   const EJ_TPL_CUSTOMER = 'template_2rmaruq';  // Customer confirmation email
   const EJ_TPL_OWNER    = 'template_f8b3lbu';  // Owner notification → info@trutechrepairs.com
   // ───────────────────────────────────────────────────────────────
-
-  if (!EJ_KEY) { console.warn('EmailJS public key not set in RepairTrack settings'); return; }
 
   const templateParams = {
     customer_name:  b.customer_name,
