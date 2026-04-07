@@ -1037,27 +1037,49 @@ async function confirmBooking() {
 }
 
 async function sendConfirmationEmail(b, ref) {
-  if (!EMAIL_CFG.key || !EMAIL_CFG.svc || !EMAIL_CFG.tpl) return;
   if (typeof emailjs === 'undefined') { console.warn('EmailJS not loaded'); return; }
+
+  // ── EmailJS config (Zoho CA SMTP) ──────────────────────────────
+  const EJ_KEY = EMAIL_CFG.key || '';          // Public key from RepairTrack settings
+  const EJ_SVC = 'service_ucfn57p';            // Zoho CA service
+  const EJ_TPL_CUSTOMER = 'template_2rmaruq';  // Customer confirmation email
+  const EJ_TPL_OWNER    = 'template_f8b3lbu';  // Owner notification → info@trutechrepairs.com
+  // ───────────────────────────────────────────────────────────────
+
+  if (!EJ_KEY) { console.warn('EmailJS public key not set in RepairTrack settings'); return; }
+
+  const templateParams = {
+    customer_name:  b.customer_name,
+    customer_email: b.customer_email,
+    customer_phone: b.customer_phone,
+    device_type:    `${b.device_brand} ${b.device_model}`.trim(),
+    device_brand:   b.device_brand,
+    device_model:   b.device_model,
+    service:        b.service,
+    issue_description: b.notes || '—',
+    preferred_date: `${fmtDisp(b.booking_date)} at ${fmtTime(b.booking_time)}`,
+    booking_date:   fmtDisp(b.booking_date),
+    booking_time:   fmtTime(b.booking_time),
+    reference:      ref,
+    notes:          b.notes || '—',
+    submission_time: new Date().toLocaleString('en-CA', { timeZone: 'America/Halifax' }),
+    shop_name:      'Cheticamp TruTech Repairs',
+    shop_phone:     '(902) 555-0192',
+    shop_address:   'Cheticamp, Cape Breton, Nova Scotia',
+  };
+
   try {
-    await emailjs.init(EMAIL_CFG.key);
-    await emailjs.send(EMAIL_CFG.svc, EMAIL_CFG.tpl, {
-      customer_name:  b.customer_name,
-      customer_email: b.customer_email,
-      customer_phone: b.customer_phone,
-      service:        b.service,
-      device_brand:   b.device_brand,
-      device_model:   b.device_model,
-      booking_date:   fmtDisp(b.booking_date),
-      booking_time:   fmtTime(b.booking_time),
-      reference:      ref,
-      notes:          b.notes || '—',
-      owner_email:    EMAIL_CFG.owner || '',
-      shop_name:      'Cheticamp TruTech Repairs',
-      shop_phone:     '(902) 555-0192',
-      shop_address:   'Cheticamp, Cape Breton, Nova Scotia',
-    });
-  } catch(e) { console.warn('Email failed:', e); }
+    await emailjs.init(EJ_KEY);
+
+    // 1️⃣ Customer confirmation
+    await emailjs.send(EJ_SVC, EJ_TPL_CUSTOMER, templateParams);
+    console.log('✅ Customer confirmation email sent');
+
+    // 2️⃣ Owner notification → info@trutechrepairs.com
+    await emailjs.send(EJ_SVC, EJ_TPL_OWNER, templateParams);
+    console.log('✅ Owner notification email sent');
+
+  } catch(e) { console.warn('Email send failed:', e); }
 }
 
 function showSuccess(b, ref) {
