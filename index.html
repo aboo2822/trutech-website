@@ -602,8 +602,8 @@ footer a,footer a:hover,
   <button class="mm-cl" onclick="toggleMenu()">✕</button>
       <a href="services.html" onclick="toggleMenu()">Services</a>
   <a href="why-us.html" onclick="toggleMenu()">Why Us</a>
-  <a href="index.html#process" onclick="toggleMenu();scrollToSection('process');return false;">Process</a>
-  <a href="index.html#testimonials" onclick="toggleMenu();scrollToSection('testimonials');return false;">Reviews</a>
+  <a href="index.html#process" onclick="closeAndScroll('process');return false;">Process</a>
+  <a href="index.html#testimonials" onclick="closeAndScroll('testimonials');return false;">Reviews</a>
   <a href="track-repair.html" onclick="toggleMenu()">Track Repair</a>
   <a href="booking.html" onclick="toggleMenu()">Book</a>
   <a href="booking.html" class="btn-p" onclick="toggleMenu()" style="margin-top:20px;">Book a Repair</a>
@@ -1215,12 +1215,15 @@ function toggleMenu(){
   if(mm) mm.classList.toggle("open");
 }
 
-function scrollToSection(id){
-  // Small delay to let menu close animation start first
+function closeAndScroll(id){
+  // Force-close menu (never toggle — prevents re-open on rapid taps)
+  var mm=document.getElementById("mm");
+  if(mm) mm.classList.remove("open");
+  // Scroll after menu close animation completes
   setTimeout(function(){
     var el=document.getElementById(id);
-    if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
-  }, 150);
+    if(el) el.scrollIntoView({behavior:"smooth",block:"start"});
+  }, 200);
 }
 
 // Hamburger touchstart for iOS
