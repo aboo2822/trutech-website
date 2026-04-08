@@ -95,8 +95,8 @@ if(!localStorage.getItem('rt_url'))localStorage.setItem('rt_url','https://gvawcn
   "alternateName": "TruTech Repairs",
   "description": "Cheticamp's trusted phone, tablet and computer repair shop. iPhone screen repair, battery replacement, water damage recovery, laptop repair. Serving Cape Breton and the Cabot Trail.",
   "url": "https://chetitrutech.ca",
-  "telephone": "+19025550192",
-  "email": "info@chetitrutech.ca",
+  "telephone": "+19029510505",
+  "email": "info@trutechrepairs.com",
   "image": "https://chetitrutech.ca/logo.png",
   "priceRange": "$$",
   "currenciesAccepted": "CAD",
@@ -180,7 +180,7 @@ if(!localStorage.getItem('rt_url'))localStorage.setItem('rt_url','https://gvawcn
     {
       "@type": "Question",
       "name": "Where is TruTech Repairs located?",
-      "acceptedAnswer": {"@type":"Answer","text":"TruTech Repairs is located in Cheticamp, Cape Breton, Nova Scotia. We serve Cheticamp and the surrounding Cabot Trail area. Call (902) 555-0192 for directions."}
+      "acceptedAnswer": {"@type":"Answer","text":"TruTech Repairs is located in Cheticamp, Cape Breton, Nova Scotia. We serve Cheticamp and the surrounding Cabot Trail area. Call (902) 951-0505 for directions."}
     }
   ]
 }</script>
@@ -602,8 +602,8 @@ footer a,footer a:hover,
   <button class="mm-cl" onclick="toggleMenu()">✕</button>
       <a href="services.html" onclick="toggleMenu()">Services</a>
   <a href="why-us.html" onclick="toggleMenu()">Why Us</a>
-  <a href="index.html#process" onclick="toggleMenu()">Process</a>
-  <a href="index.html#testimonials" onclick="toggleMenu()">Reviews</a>
+  <a href="index.html#process" onclick="toggleMenu();scrollToSection('process');return false;">Process</a>
+  <a href="index.html#testimonials" onclick="toggleMenu();scrollToSection('testimonials');return false;">Reviews</a>
   <a href="track-repair.html" onclick="toggleMenu()">Track Repair</a>
   <a href="booking.html" onclick="toggleMenu()">Book</a>
   <a href="booking.html" class="btn-p" onclick="toggleMenu()" style="margin-top:20px;">Book a Repair</a>
@@ -984,10 +984,10 @@ async function submitBooking(){
     document.getElementById('bk-success').classList.add('active');
     document.getElementById('bk-foot').style.display='none';
     const detail=BK.mode==='book'
-      ?`<br><strong style="color:#f0eeea;">${fmtDate(BK.date)} at ${fmtT(BK.time)}</strong><br>${BK.service} · ${BK.brand}<br><br>${email?'A confirmation email has been sent to <strong style="color:#f0eeea;">'+email+'</strong>.':'<br>'}<br><br>Please arrive on time. If you need to reschedule call us at <strong style="color:#c41e1e;">(902) 555-0192</strong>`
+      ?`<br><strong style="color:#f0eeea;">${fmtDate(BK.date)} at ${fmtT(BK.time)}</strong><br>${BK.service} · ${BK.brand}<br><br>${email?'A confirmation email has been sent to <strong style="color:#f0eeea;">'+email+'</strong>.':'<br>'}<br><br>Please arrive on time. If you need to reschedule call us at <strong style="color:#c41e1e;">(902) 951-0505</strong>`
       :`<br>We'll call you shortly to discuss your <strong style="color:#f0eeea;">${BK.service}</strong> for your <strong style="color:#f0eeea;">${BK.brand}</strong>.<br><br>📞 <strong style="color:#f0eeea;">${phone}</strong>`;
     document.getElementById('bk-success-detail').innerHTML=detail;
-  }catch(e){alert('Something went wrong. Please call us at (902) 555-0192');btn.textContent='Confirm Booking ✓';btn.disabled=false;}
+  }catch(e){alert('Something went wrong. Please call us at (902) 951-0505');btn.textContent='Confirm Booking ✓';btn.disabled=false;}
 }
 
 async function sendConfirmEmail(params){
@@ -997,7 +997,7 @@ async function sendConfirmEmail(params){
   try{
     await fetch('https://api.emailjs.com/api/v1.0/email/send',{
       method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({service_id:cfg.svc,template_id:cfg.tpl,user_id:cfg.key,template_params:{...params,owner_email:cfg.owner||'',shop_name:'Cheticamp TruTech Repairs',shop_phone:'(902) 555-0192',shop_address:'Cheticamp, Cape Breton, NS'}})
+      body:JSON.stringify({service_id:cfg.svc,template_id:cfg.tpl,user_id:cfg.key,template_params:{...params,owner_email:cfg.owner||'',shop_name:'Cheticamp TruTech Repairs',shop_phone:'(902) 951-0505',shop_address:'Cheticamp, Cape Breton, NS'}})
     });
   }catch(e){console.warn('Email send failed',e);}
 }
@@ -1213,6 +1213,14 @@ if(nav){
 function toggleMenu(){
   var mm=document.getElementById("mm");
   if(mm) mm.classList.toggle("open");
+}
+
+function scrollToSection(id){
+  // Small delay to let menu close animation start first
+  setTimeout(function(){
+    var el=document.getElementById(id);
+    if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+  }, 150);
 }
 
 // Hamburger touchstart for iOS
