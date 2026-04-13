@@ -1196,6 +1196,21 @@ async function submitQuote() {
         ).join('');
       }
     }
+
+    // Hours — update booking page sidebar and any hours list
+    if(S.hours&&Array.isArray(S.hours)){
+      const today=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][new Date().getDay()];
+      const hoursEl=document.getElementById('hours-list');
+      if(hoursEl){
+        hoursEl.innerHTML=S.hours.map(function(h){
+          const isToday=h.day===today;
+          const timeStr=h.closed?'Closed':h.open+' – '+h.close;
+          return '<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--b1);'+(isToday?'color:var(--red);font-weight:700;':'')+'">'+
+            '<span style="font-size:12px;">'+h.day+'</span>'+
+            '<span style="font-size:12px;font-weight:600;">'+timeStr+'</span></div>';
+        }).join('');
+      }
+    }
   }catch(e){console.warn('Settings load failed:',e);}
 })();
 </script>
