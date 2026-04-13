@@ -135,7 +135,7 @@ if(!localStorage.getItem('rt_url'))localStorage.setItem('rt_url','https://gvawcn
     {"@type":"Offer","itemOffered":{"@type":"Service","name":"Battery Replacement","description":"Phone and tablet battery replacement"}},
     {"@type":"Offer","itemOffered":{"@type":"Service","name":"Water Damage Repair","description":"Ultrasonic water damage treatment and recovery"}},
     {"@type":"Offer","itemOffered":{"@type":"Service","name":"Computer Repair","description":"Laptop and desktop repair, virus removal, upgrades"}},
-    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Data Recovery","description":"Recover lost photos, contacts and files from damaged devices"}}
+    {"@type":"Offer","itemOffered":{"@type":"Service","name":"Data Transfer","description":"Recover lost photos, contacts and files from damaged devices"}}
   ],
   "aggregateRating": {
     "@type": "AggregateRating",
@@ -711,10 +711,10 @@ footer a,footer a:hover,
 <div class="ticker"><div class="tt">
   <span class="ti">Screen Repair</span><span class="ti">Battery Swap</span><span class="ti">Charging Port</span>
   <span class="ti">Computer Repair</span><span class="ti">Charging Port</span><span class="ti">Tablet Repair</span>
-  <span class="ti">Camera Fix</span><span class="ti">Data Recovery</span><span class="ti">Same-Day Service</span><span class="ti">90-Day Warranty</span>
+  <span class="ti">Camera Fix</span><span class="ti">Data Transfer</span><span class="ti">Same-Day Service</span><span class="ti">90-Day Warranty</span>
   <span class="ti">Screen Repair</span><span class="ti">Battery Swap</span><span class="ti">Charging Port</span>
   <span class="ti">Computer Repair</span><span class="ti">Charging Port</span><span class="ti">Tablet Repair</span>
-  <span class="ti">Camera Fix</span><span class="ti">Data Recovery</span><span class="ti">Same-Day Service</span><span class="ti">90-Day Warranty</span>
+  <span class="ti">Camera Fix</span><span class="ti">Data Transfer</span><span class="ti">Same-Day Service</span><span class="ti">90-Day Warranty</span>
 </div></div>
 
 <!-- SERVICES -->
@@ -729,7 +729,7 @@ footer a,footer a:hover,
     <div class="sc rv d2" onclick="window.location.href='booking.html?service=charging'" style="cursor:none;"><span class="sc-n">03</span><span class="sc-i">🔌</span><div class="sc-nm">Charging Port</div><p class="sc-d">Not charging or charging intermittently? We clean, repair and replace charging ports on all iPhone, Samsung and Android devices — usually in under 30 minutes.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="charging">$49</span></div><div class="sc-ar">→</div></div>
     <div class="sc rv"><span class="sc-n">04</span><span class="sc-i">💻</span><div class="sc-nm">Computer Repair</div><p class="sc-d">Slow PC, virus removal, hardware upgrades, broken screens — Mac and Windows laptops and desktops.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="computer">$69</span></div><div class="sc-ar">→</div></div>
     <div class="sc rv d1"><span class="sc-n">05</span><span class="sc-i">📲</span><div class="sc-nm">Tablet Repair</div><p class="sc-d">iPad and Android tablet screen repairs, battery replacements, charging port fixes and software issues.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="tablet">$59</span></div><div class="sc-ar">→</div></div>
-    <div class="sc rv d2"><span class="sc-n">06</span><span class="sc-i">💾</span><div class="sc-nm">Data Recovery</div><p class="sc-d">Dead device? Don't lose your photos. Our advanced recovery tools retrieve data that others can't reach.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="data">$99</span></div><div class="sc-ar">→</div></div>
+    <div class="sc rv d2"><span class="sc-n">06</span><span class="sc-i">💾</span><div class="sc-nm">Data Transfer</div><p class="sc-d">Dead device? Don't lose your photos. Our advanced transfer tools retrieve data that others can't reach.</p><div class="sc-p"><span class="sc-pf">From</span><span class="sc-pa" data-ws-price="data">$99</span></div><div class="sc-ar">→</div></div>
   </div>
 </section>
 
@@ -818,7 +818,7 @@ footer a,footer a:hover,
       </div>
       <p>Cape Breton's trusted phone, tablet and computer repair specialists. Serving Cheticamp and the Cabot Trail.</p>
     </div>
-    <div class="fc"><div class="fct">Services</div><a href="services.html#screen">Screen Repair</a><a href="services.html#battery">Battery Swap</a><a href="services.html#charging">Charging Port</a><a href="services.html#computer">Computer Repair</a><a href="services.html#tablet">Tablet Repair</a><a href="services.html#data">Data Recovery</a></div>
+    <div class="fc"><div class="fct">Services</div><a href="services.html#screen">Screen Repair</a><a href="services.html#battery">Battery Swap</a><a href="services.html#charging">Charging Port</a><a href="services.html#computer">Computer Repair</a><a href="services.html#tablet">Tablet Repair</a><a href="services.html#data">Data Transfer</a></div>
     <div class="fc"><div class="fct">Devices</div><a href="#devices">Apple iPhone</a><a href="#devices">Samsung Galaxy</a><a href="#devices">Google Pixel</a><a href="#devices">iPad & Tablets</a><a href="#devices">Windows PC</a><a href="#devices">MacBook</a></div>
     <div class="fc"><div class="fct">Company</div><a href="why-us.html">About Us</a><a href="#testimonials">Reviews</a><a href="booking.html">Contact</a><a href="#">Warranty Policy</a><a href="#">Privacy Policy</a></div>
   </div>
@@ -1073,7 +1073,7 @@ async function submitQuote() {
           <button class="qpill" onclick="qSelectService(this,'Charging Port')">🔌 Charging Port</button>
           <button class="qpill" onclick="qSelectService(this,'Computer Repair')">💻 Computer</button>
           <button class="qpill" onclick="qSelectService(this,'Tablet Repair')">📲 Tablet</button>
-          <button class="qpill" onclick="qSelectService(this,'Data Recovery')">💾 Data Recovery</button>
+          <button class="qpill" onclick="qSelectService(this,'Data Transfer')">💾 Data Transfer</button>
           <button class="qpill" onclick="qSelectService(this,'Other')">❓ Other</button>
         </div>
         <input type="hidden" id="q-service" value="">
