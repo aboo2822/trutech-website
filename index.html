@@ -799,7 +799,7 @@ footer a,footer a:hover,
 <!-- TESTIMONIALS -->
 <section class="testimonials" id="testimonials">
   <div class="rv"><div class="sl">Customer Reviews</div><h2 class="st">What Our Customers Say</h2></div>
-  <div class="tg">
+  <div class="tg" id="reviews-grid">
     <div class="tc rv"><div class="tc-s">★★★★★</div><div class="tc-q">"</div><p class="tc-t">Dropped my iPhone and shattered the screen. TruTech had it fixed in under an hour and it looks brand new. Best shop in Cape Breton!</p><div class="tc-a"><div class="tc-av">ML</div><div><div class="tc-nm">Marie L.</div><div class="tc-sb">iPhone Screen Repair</div></div></div></div>
     <div class="tc rv d1"><div class="tc-s">★★★★★</div><div class="tc-q">"</div><p class="tc-t">My iPhone kept cutting out while charging — sometimes it wouldn't charge at all. TruTech cleaned and fixed the port in 20 minutes flat. Works perfectly now, saved me from buying a new phone.</p><div class="tc-a"><div class="tc-av">JP</div><div><div class="tc-nm">Jean-Pierre B.</div><div class="tc-sb">iPhone Charging Port Repair</div></div></div></div>
     <div class="tc rv d2"><div class="tc-s">★★★★★</div><div class="tc-q">"</div><p class="tc-t">My old laptop was painfully slow. They put in an SSD and it runs like new again. Amazing value, fast turnaround, and super friendly service.</p><div class="tc-a"><div class="tc-av">AC</div><div><div class="tc-nm">Angele C.</div><div class="tc-sb">Laptop Upgrade & Repair</div></div></div></div>
@@ -1184,16 +1184,23 @@ async function submitQuote() {
       });
     }
 
-    // Reviews
+    // Reviews — show first 3 from Supabase
     if(S.reviews&&Array.isArray(S.reviews)&&S.reviews.length){
       const grid=document.getElementById('reviews-grid');
       if(grid){
-        grid.innerHTML=S.reviews.map(r=>
-          '<div class="rv-card"><div class="rv-stars">'+('★'.repeat(r.stars||5))+'</div>'+
-          '<p class="rv-text">"'+r.text+'"</p>'+
-          '<div class="rv-author"><div class="rv-av">'+r.name.charAt(0)+'</div>'+
-          '<div><div class="rv-nm">'+r.name+'</div><div class="rv-sb">'+r.role+'</div></div></div></div>'
-        ).join('');
+        grid.innerHTML=S.reviews.slice(0,3).map(function(r,i){
+          const initials=r.name.split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
+          const delay=i===1?' d1':i===2?' d2':'';
+          return '<div class="tc rv'+delay+'">'+
+            '<div class="tc-s">'+'★'.repeat(r.stars||5)+'</div>'+
+            '<div class="tc-q">\u201c</div>'+
+            '<p class="tc-t">'+r.text+'</p>'+
+            '<div class="tc-a">'+
+              '<div class="tc-av">'+initials+'</div>'+
+              '<div><div class="tc-nm">'+r.name+'</div><div class="tc-sb">'+r.role+'</div></div>'+
+            '</div>'+
+          '</div>';
+        }).join('');
       }
     }
 
