@@ -357,7 +357,7 @@ nav a,footer a,[href],[onclick]{cursor:none!important;}
         <h3>Contact Info</h3>
         <div class="ci"><div class="ci-ic">📍</div><div><div class="ci-l">Location</div><div class="ci-v">Cheticamp, Cape Breton, NS</div></div></div>
         <div class="ci"><div class="ci-ic">📞</div><div><div class="ci-l">Phone</div><div class="ci-v"><a href="tel:9029510505" data-ws="phone">(902) 951-0505</a></div></div></div>
-        <div class="ci"><div class="ci-ic">✉️</div><div><div class="ci-l">Email</div><div class="ci-v"><a id="contact-email" href="#"><span class="__cf_email__" data-cfemail="b9d0d7dfd6f9cdcbcccddcdad1cbdcc9d8d0cbca97dad6d4">[email&#160;protected]</span></a></div></div></div>
+        <div class="ci"><div class="ci-ic">✉️</div><div><div class="ci-l">Email</div><div class="ci-v"><a id="contact-email" href="#">info@trutechrepairs.com</a></div></div></div>
       </div>
       <div class="info-card">
         <h3>Our Promise</h3>
@@ -1154,9 +1154,12 @@ if (svcParam) {
     // Apply email
     if (settings.email) {
       document.querySelectorAll('[data-ws="email"]').forEach(el => el.textContent = settings.email);
+      // Update contact panel email link by ID (bypasses Cloudflare obfuscation)
+      const contactEmail = document.getElementById('contact-email');
+      if (contactEmail) { contactEmail.href = 'mailto:' + settings.email; contactEmail.textContent = settings.email; }
       document.querySelectorAll('a[href^="mailto:"]').forEach(el => {
         el.href = 'mailto:' + settings.email;
-        if (!el.textContent.includes('@') === false && el.textContent.includes('@')) el.textContent = settings.email;
+        if (el.textContent.includes('@')) el.textContent = settings.email;
       });
     }
 
@@ -1209,11 +1212,11 @@ if (svcParam) {
       if (tag && h.tag) { tag.innerHTML = `<span style="color:var(--red);font-size:9px;">⚓</span> ${h.tag} <span style="color:var(--red);font-size:9px;">⚓</span>`; }
     }
 
-    // Apply business hours
+    // Apply business hours — targets #hours-list on booking page
     if (settings.hours && Array.isArray(settings.hours)) {
-      const hoursContainer = document.querySelector('[data-ws="hours"]');
+      const today = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][new Date().getDay()];
+      const hoursContainer = document.getElementById('hours-list') || document.querySelector('[data-ws="hours"]');
       if (hoursContainer) {
-        const today = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][new Date().getDay()];
         hoursContainer.innerHTML = settings.hours.map(h => {
           const isToday = h.day === today;
           const time = h.closed ? 'Closed' : `${h.open} – ${h.close}`;
