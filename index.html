@@ -447,7 +447,7 @@ nav.on{background:rgba(9,9,11,.95);backdrop-filter:blur(18px);border-bottom-colo
 
 /* TESTIMONIALS */
 .testimonials{padding:96px 40px;background:var(--s1);}
-.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b1);margin-top:48px;}
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b1);}
 .tc{background:var(--s1);padding:30px 24px;position:relative;}
 .tc-s{position:absolute;top:24px;right:24px;font-size:11px;color:var(--red);letter-spacing:2px;}
 .tc-q{font-size:36px;font-family:var(--fd);color:var(--red);line-height:1;margin-bottom:10px;font-style:italic;}
@@ -456,6 +456,19 @@ nav.on{background:rgba(9,9,11,.95);backdrop-filter:blur(18px);border-bottom-colo
 .tc-av{width:34px;height:34px;border-radius:50%;background:var(--b2);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:13px;font-weight:800;color:var(--red);}
 .tc-nm{font-family:var(--fd);font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;}
 .tc-sb{font-family:var(--fm);font-size:9px;color:var(--g1);letter-spacing:1px;margin-top:1px;}
+
+/* Reviews Carousel */
+.rc-wrap{display:flex;align-items:center;gap:12px;margin-top:48px;}
+.rc-viewport{flex:1;overflow:hidden;}
+.rc-track{transition:opacity .35s ease;background:var(--b1);}
+.rc-track.rc-fade{opacity:0;}
+.rc-btn{flex-shrink:0;width:44px;height:44px;background:var(--bg);border:1px solid var(--b2);color:var(--white);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;line-height:1;}
+.rc-btn:hover{border-color:var(--red);color:var(--red);}
+.rc-btn:disabled{opacity:.25;cursor:not-allowed;border-color:var(--b1);color:var(--g1);}
+.rc-dots{display:flex;justify-content:center;gap:8px;margin-top:24px;}
+.rc-dot{width:8px;height:8px;border-radius:50%;background:var(--b2);border:none;cursor:pointer;transition:all .2s;padding:0;}
+.rc-dot.active{background:var(--red);transform:scale(1.2);}
+@media(max-width:640px){.rc-btn{width:36px;height:36px;font-size:14px;}.rc-wrap{gap:6px;}}
 
 /* BOOKING */
 .booking{padding:96px 40px;background:var(--bg);}
@@ -799,11 +812,22 @@ footer a,footer a:hover,
 <!-- TESTIMONIALS -->
 <section class="testimonials" id="testimonials">
   <div class="rv"><div class="sl">Customer Reviews</div><h2 class="st">What Our Customers Say</h2></div>
-  <div class="tg">
-    <div class="tc rv"><div class="tc-s">★★★★★</div><div class="tc-q">"</div><p class="tc-t">Dropped my iPhone and shattered the screen. TruTech had it fixed in under an hour and it looks brand new. Best shop in Cape Breton!</p><div class="tc-a"><div class="tc-av">ML</div><div><div class="tc-nm">Marie L.</div><div class="tc-sb">iPhone Screen Repair</div></div></div></div>
-    <div class="tc rv d1"><div class="tc-s">★★★★★</div><div class="tc-q">"</div><p class="tc-t">My iPhone kept cutting out while charging — sometimes it wouldn't charge at all. TruTech cleaned and fixed the port in 20 minutes flat. Works perfectly now, saved me from buying a new phone.</p><div class="tc-a"><div class="tc-av">JP</div><div><div class="tc-nm">Jean-Pierre B.</div><div class="tc-sb">iPhone Charging Port Repair</div></div></div></div>
-    <div class="tc rv d2"><div class="tc-s">★★★★★</div><div class="tc-q">"</div><p class="tc-t">My old laptop was painfully slow. They put in an SSD and it runs like new again. Amazing value, fast turnaround, and super friendly service.</p><div class="tc-a"><div class="tc-av">AC</div><div><div class="tc-nm">Angele C.</div><div class="tc-sb">Laptop Upgrade & Repair</div></div></div></div>
+
+  <!-- Carousel wrapper -->
+  <div class="rc-wrap">
+    <button class="rc-btn rc-prev" id="rc-prev" onclick="rcNav(-1)" aria-label="Previous reviews">&#8592;</button>
+    <div class="rc-viewport">
+      <div class="tg rc-track" id="reviews-grid">
+        <div class="tc rv"><div class="tc-s">★★★★★</div><div class="tc-q">"</div><p class="tc-t">Dropped my iPhone and shattered the screen. TruTech had it fixed in under an hour and it looks brand new. Best shop in Cape Breton!</p><div class="tc-a"><div class="tc-av">ML</div><div><div class="tc-nm">Marie L.</div><div class="tc-sb">iPhone Screen Repair</div></div></div></div>
+        <div class="tc rv"><div class="tc-s">★★★★★</div><div class="tc-q">"</div><p class="tc-t">My iPhone kept cutting out while charging — sometimes it wouldn't charge at all. TruTech cleaned and fixed the port in 20 minutes flat. Works perfectly now, saved me from buying a new phone.</p><div class="tc-a"><div class="tc-av">JP</div><div><div class="tc-nm">Jean-Pierre B.</div><div class="tc-sb">iPhone Charging Port Repair</div></div></div></div>
+        <div class="tc rv"><div class="tc-s">★★★★★</div><div class="tc-q">"</div><p class="tc-t">My old laptop was painfully slow. They put in an SSD and it runs like new again. Amazing value, fast turnaround, and super friendly service.</p><div class="tc-a"><div class="tc-av">AC</div><div><div class="tc-nm">Angele C.</div><div class="tc-sb">Laptop Upgrade & Repair</div></div></div></div>
+      </div>
+    </div>
+    <button class="rc-btn rc-next" id="rc-next" onclick="rcNav(1)" aria-label="Next reviews">&#8594;</button>
   </div>
+
+  <!-- Dot indicators -->
+  <div class="rc-dots" id="rc-dots"></div>
 </section>
 
 <!-- BOOKING -->
@@ -1184,17 +1208,9 @@ async function submitQuote() {
       });
     }
 
-    // Reviews
+    // Reviews — feed into carousel
     if(S.reviews&&Array.isArray(S.reviews)&&S.reviews.length){
-      const grid=document.getElementById('reviews-grid');
-      if(grid){
-        grid.innerHTML=S.reviews.map(r=>
-          '<div class="rv-card"><div class="rv-stars">'+('★'.repeat(r.stars||5))+'</div>'+
-          '<p class="rv-text">"'+r.text+'"</p>'+
-          '<div class="rv-author"><div class="rv-av">'+r.name.charAt(0)+'</div>'+
-          '<div><div class="rv-nm">'+r.name+'</div><div class="rv-sb">'+r.role+'</div></div></div></div>'
-        ).join('');
-      }
+      rcInit(S.reviews);
     }
 
     // Hours — update booking page sidebar and any hours list
@@ -1260,6 +1276,90 @@ document.addEventListener("DOMContentLoaded",function(){
       setTimeout(toggleMenu,100);
     },{passive:true});
   });
+});
+<script>
+// ── Reviews Carousel ──────────────────────────────────────────
+var RC = { page: 0, perPage: 3, reviews: [] };
+
+function rcInit(reviews) {
+  RC.reviews = reviews || [];
+  rcRender();
+}
+
+function rcRender() {
+  var grid = document.getElementById('reviews-grid');
+  var dots = document.getElementById('rc-dots');
+  var prev = document.getElementById('rc-prev');
+  var next = document.getElementById('rc-next');
+  if (!grid) return;
+
+  var total = RC.reviews.length;
+  var pages = Math.ceil(total / RC.perPage);
+  RC.page = Math.max(0, Math.min(RC.page, pages - 1));
+
+  var slice = RC.reviews.slice(RC.page * RC.perPage, RC.page * RC.perPage + RC.perPage);
+
+  grid.innerHTML = slice.map(function(r) {
+    var initials = r.name.split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase();
+    return '<div class="tc">' +
+      '<div class="tc-s">' + '★'.repeat(r.stars || 5) + '</div>' +
+      '<div class="tc-q">\u201c</div>' +
+      '<p class="tc-t">' + r.text + '</p>' +
+      '<div class="tc-a">' +
+        '<div class="tc-av">' + initials + '</div>' +
+        '<div><div class="tc-nm">' + r.name + '</div><div class="tc-sb">' + r.role + '</div></div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+
+  // Dots
+  if (dots) {
+    dots.innerHTML = '';
+    for (var i = 0; i < pages; i++) {
+      var btn = document.createElement('button');
+      btn.className = 'rc-dot' + (i === RC.page ? ' active' : '');
+      btn.setAttribute('aria-label', 'Page ' + (i + 1));
+      btn.setAttribute('data-page', i);
+      btn.onclick = function() { RC.page = parseInt(this.getAttribute('data-page')); rcRender(); };
+      dots.appendChild(btn);
+    }
+  }
+
+  // Arrow states
+  if (prev) prev.disabled = RC.page === 0;
+  if (next) next.disabled = RC.page >= pages - 1;
+}
+
+function rcNav(dir) {
+  var grid = document.getElementById('reviews-grid');
+  if (!grid) return;
+  grid.classList.add('rc-fade');
+  setTimeout(function() {
+    RC.page += dir;
+    rcRender();
+    grid.classList.remove('rc-fade');
+  }, 200);
+}
+
+// Seed with hardcoded fallback reviews so carousel works before Supabase loads
+document.addEventListener('DOMContentLoaded', function() {
+  // Collect whatever cards are already in the grid as fallback
+  var existing = document.querySelectorAll('#reviews-grid .tc');
+  if (existing.length && RC.reviews.length === 0) {
+    // Already rendered by hardcode — just init dots/arrows
+    var fakeReviews = [];
+    existing.forEach(function(el) {
+      fakeReviews.push({
+        name: (el.querySelector('.tc-nm') || {}).textContent || '',
+        role: (el.querySelector('.tc-sb') || {}).textContent || '',
+        text: (el.querySelector('.tc-t') || {}).textContent || '',
+        stars: 5
+      });
+    });
+    RC.reviews = fakeReviews;
+    // Re-render so dots/arrows appear
+    rcRender();
+  }
 });
 </script>
 </body>
